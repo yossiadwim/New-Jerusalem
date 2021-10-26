@@ -1,0 +1,29 @@
+.layout{
+    -fx-background-color:  #f6f6f2;
+}
+#title_background{
+    -fx-background-color: #388087;
+    
+}
+#title{
+    -fx-fill: #f6f6f2;
+}
+
+#searchbutton{
+    -fx-background-color:transparent;;
+    -fx-text-fill: #fefbe9;
+}
+.button:pressed{
+    -fx-background-color: #f0a04b;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+.scroll-pane{
+    
+ }
+.button_hover:hover{
+    -fx-background-color:#badfe7 !important;
+
+}
