@@ -101,8 +101,24 @@ public class database {
             return e.getMessage();
         }
     }
+
+    public versesAndCount viewVisualisasiUtama(String ayat){
+        String query = "select people, peopleCount, places, placesCount from verses where osisRef = '" + ayat +"'";
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(query)){
+            // while (rs.next()) {
+            //     hasil.add(new versesAndCount(rs.getString("people"), rs.getInt("peopleCount"), rs.getString("places"), rs.getInt("placesCount")));
+            // }
+            return new versesAndCount(rs.getString("people"), rs.getInt("peopleCount"), rs.getString("places"), rs.getInt("placesCount"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+     }
 //    public static void main(String[] args){
 //        dbnya a = new dbnya();
 //        a.connect();
 //    }
 }
+
