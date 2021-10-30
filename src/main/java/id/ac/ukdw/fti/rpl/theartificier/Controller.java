@@ -244,10 +244,12 @@ public class Controller{
 
             // mulai buat bar visualisasi
             List<Map.Entry<String, Integer> > listPeople2 = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
+
             for (Map.Entry<String, Integer> peopleCount : listPeople) {
                 BarVisualisasi barPeople = createBarVisualisasi(peopleCount.getKey(), peopleCount.getValue(), peopleCountMap, "people");
                 rectPeople.add(barPeople.getRect());
                 labelRectPeople.add(barPeople.getLbl());
+               
             }
 
             List<Map.Entry<String, Integer> > listPlaces2 = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
@@ -327,7 +329,7 @@ public class Controller{
 							Map.Entry<String, Integer> o2)
 			{
 				return (o2.getValue()).compareTo(o1.getValue());
-			}
+            }
 		});
 		
 		// put data from sorted list to hashmap
@@ -338,30 +340,42 @@ public class Controller{
 		return temp;
 	}
     
-    private BarVisualisasi createBarVisualisasi(String nama, double count, double jumlah, String keterangan){
+    private BarVisualisasi createBarVisualisasi(String id, double count, double jumlah, String keterangan){
         double width = (count/jumlah) * maxRect;
-        Label lbl = new Label(nama + " = " + (int) count);
+        
         Rectangle rect = new Rectangle();
         rect.setWidth(width);
         rect.setHeight(heightRect);
         rect.setX(XBar);
         rect.setFill(Color.GREY);
         if(keterangan.equals("people")){
+            String namaPeople = db.ambilNamaPeople(id);
+            Label lbl = new Label(namaPeople +  " = " + (int) count);
             rect.setY(YBarPeople);
             lbl.setLayoutY(layoutYBarPeople);
             YBarPeople += 32;
             layoutYBarPeople += 32;
+
+            lbl.setLayoutX(layoutXBar);
+            BarVisualisasi bar = new BarVisualisasi(rect, lbl);
+            return bar;
         }
         else if(keterangan.equals("places")){
+            String namaPlaces = db.ambilNamaPlaces(id);
+            Label lbl = new Label(namaPlaces +  " = " + (int) count);
             rect.setY(YBarPlaces);
             lbl.setLayoutY(layoutYBarPlaces);
             YBarPlaces += 32;
             layoutYBarPlaces += 32;
+            
+            lbl.setLayoutX(layoutXBar);
+            BarVisualisasi bar = new BarVisualisasi(rect, lbl);
+            return bar;
         }
-        lbl.setLayoutX(layoutXBar);
-        BarVisualisasi bar = new BarVisualisasi(rect, lbl);
-        return bar;
+        return null;
+        
     }
+    
     private String cekAyat(String ayat){
         // database db = new database();
         String hasil = db.viewAyat(ayat);
@@ -369,18 +383,6 @@ public class Controller{
     }
     
     private ButtonLabel createButtonLabel(String ayat){
-        
-        // EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            
-        //     public void handle(ActionEvent e)
-        //     {   
-                
-        //         // String verse = ayat + "\n" + cekAyat(ayat);
-        //         // area.setText(verse);
-                
-                
-        //     }
-        // };
 
         try{
 
@@ -398,19 +400,26 @@ public class Controller{
             btn.setStyle("-fx-background-color: transparent; -fx-text-fill: blue; -fx-underline: true");
             
             double lebar = lenIsiAyat/39;
+
+            if(lebar == 0.0){
+                lebar = 1;
+            }
+
             lbl.setPrefHeight(lebar * 20);
             layoutY += (lebar * 20) + 13;
 
             lbl.setPadding(new javafx.geometry.Insets(0, 20, 0, 10));
             lbl.setText(isiAyat);
             lbl.setWrapText(true);
-            lbl.setPrefWidth(349);
+            lbl.setPrefWidth(490);
             lbl.setEllipsisString(null);
             
             ButtonLabel btnLbl = new ButtonLabel(btn, lbl);
             return btnLbl;
+
             
         }
+        
         catch(Exception e){
 
             Button btn = new Button(ayat);
@@ -430,7 +439,7 @@ public class Controller{
             lbl.setPadding(new javafx.geometry.Insets(0, 20, 0, 10));
             lbl.setText(isiAyat);
             lbl.setWrapText(true);
-            lbl.setPrefWidth(349);
+            lbl.setPrefWidth(490);
             lbl.setEllipsisString(null);
             
             ButtonLabel btnLbl = new ButtonLabel(btn, lbl);

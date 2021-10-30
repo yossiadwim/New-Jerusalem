@@ -116,9 +116,39 @@ public class database {
         }
         return null;
      }
+
+     public String ambilNamaPeople(String id){
+        String query = "select displayTitle from people where personLookup = '" + id +"'";
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(query)){
+            while (rs.next()) {
+                return rs.getString("displayTitle");
+            }
+            return rs.getString("verseText");
+        } 
+        catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+
+    
+    public String ambilNamaPlaces(String id){
+        String query = "select displayTitle from places where placeLookup = '" + id +"'";
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(query)){
+            while (rs.next()) {
+                return rs.getString("displayTitle");
+            }
+            return rs.getString("verseText");
+        } 
+        catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
 //    public static void main(String[] args){
 //        dbnya a = new dbnya();
 //        a.connect();
 //    }
 }
-
