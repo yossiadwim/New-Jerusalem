@@ -12,6 +12,7 @@ import java.util.Map;
 import id.ac.ukdw.fti.rpl.theartificier.database.database;
 import id.ac.ukdw.fti.rpl.theartificier.modal.*;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -35,7 +36,7 @@ public class Controller{
     private Label labelJumlah;
 
     @FXML
-    private TextField places;
+    private TextField search;
 
     @FXML
     private ImageView image;
@@ -47,13 +48,13 @@ public class Controller{
     private Button button;
 
     @FXML
-    private Tab place;
+    private Tab tabPlace;
 
     @FXML
     private ScrollPane scrollpanePlace;
 
     @FXML
-    private Tab event;
+    private Tab tabEvent;
 
     @FXML
     private ScrollPane scrollpaneEvent;
@@ -135,18 +136,18 @@ public class Controller{
         layoutYBarPlaces = 11;
         // database db = new database();
 
-        String olahPlace = places.getText().toLowerCase();
-        String olahEvent = places.getText().toLowerCase();
+        String olahPlace = search.getText().toLowerCase();
+        String olahEvent = search.getText().toLowerCase();
 
         if(alertEmpty()){
             
             olahPlace = olahPlace.replace(" ", "-");
             olahPlace = String.valueOf(olahPlace.charAt(0)).toUpperCase() + olahPlace.substring(1).toLowerCase();
+            ArrayList<VersesAndCount> hasilPlace = db.viewDataPlace(olahPlace);
 
-            ArrayList<versesAndCount> hasilPlace = db.viewDataPlace(olahPlace);
 
             olahEvent = String.valueOf(olahEvent.charAt(0)).toUpperCase() + olahEvent.substring(1).toLowerCase();
-            ArrayList<eventHandle> hasilEvent = db.viewDataEvents(olahEvent);
+            ArrayList<EventHandle> hasilEvent = db.viewDataEvents(olahEvent);
 
             int count = 1;
             try{
@@ -158,7 +159,7 @@ public class Controller{
 
                 else{
 
-                    for (versesAndCount verse : hasilPlace) {
+                    for (VersesAndCount verse : hasilPlace) {
                         
                         if(verse.getVerseCount() > 1){
 
@@ -183,7 +184,7 @@ public class Controller{
                     }
                     layoutY = 14;
 
-                    for (eventHandle events: hasilEvent) {
+                    for (EventHandle events: hasilEvent) {
 
                         if(events.getVerses() != null){
                             String[] splitEvent = events.getVerses().split(",");
@@ -208,7 +209,7 @@ public class Controller{
                         }   
                     }
 
-                    labelJumlah.setText(count - 1+ " hasil telah ditemukan untuk '" + places.getText() + "'");
+                    labelJumlah.setText(count - 1+ " hasil telah ditemukan untuk '" + search.getText() + "'");
                 }
             }
             catch(Exception e){
@@ -223,6 +224,16 @@ public class Controller{
             tampilAyatEvent.getChildren().clear();
             tampilAyatEvent.getChildren().addAll(buttonEvent);
             tampilAyatEvent.getChildren().addAll(labelEvent);
+
+            if(hasilPlace.isEmpty()){
+                tp.getSelectionModel().select(tabEvent);
+            }
+            else if(hasilEvent.isEmpty()){
+                tp.getSelectionModel().select(tabPlace);
+            }
+            else if(hasilEvent!=null && hasilPlace != null){
+                tp.getSelectionModel().select(tabPlace);
+            }
 
             Map<String, Integer> sortedPeopleMap = sortByValue(peopleMap);
             Map<String, Integer> sortedPlacesMap = sortByValue(placesMap);
@@ -273,7 +284,7 @@ public class Controller{
 
     private void addPeoplePlacesMap(String ayat){
 
-        versesAndCount vac = db.viewVisualisasiUtama(ayat);
+        VersesAndCount vac = db.viewVisualisasiUtama(ayat);
         if(vac.getPeopleCount() > 1){
             String[] splitPeople = vac.getPeople().split(",");
             for(String j: splitPeople){
@@ -342,12 +353,12 @@ public class Controller{
     
     private BarVisualisasi createBarVisualisasi(String id, double count, double jumlah, String keterangan){
         double width = (count/jumlah) * maxRect;
-        
         Rectangle rect = new Rectangle();
         rect.setWidth(width);
         rect.setHeight(heightRect);
         rect.setX(XBar);
         rect.setFill(Color.GREY);
+
         if(keterangan.equals("people")){
             String namaPeople = db.ambilNamaPeople(id);
             Label lbl = new Label(namaPeople +  " = " + (int) count);
@@ -450,10 +461,6 @@ public class Controller{
         
     }
 
-    // @Override
-    // public void initialize(URL url, ResourceBundle rb) {
-
-    // }  
 
     private  void alertNotFound (ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -461,7 +468,7 @@ public class Controller{
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         // stage.getIcons().add(new Image("/img/appicon.png"));
        
-        String olah = places.getText();
+        String olah = search.getText();
         alert.setTitle("New Jerusalem");
         alert.setHeaderText(null);
         alert.setContentText( olah + " tidak ditemukan");
@@ -470,7 +477,7 @@ public class Controller{
     }
     
     private boolean alertEmpty(){
-        String olah = places.getText().toLowerCase();
+        String olah = search.getText().toLowerCase();
         if(olah.isEmpty()){
             Alert alert = new Alert(AlertType.WARNING);
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
