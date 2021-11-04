@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -89,7 +90,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fx:id="image" fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/search-icon.png" />
+               </image></ImageView>
          </graphic>
          <GridPane.margin>
             <Insets left="10.0" top="10.0" />
