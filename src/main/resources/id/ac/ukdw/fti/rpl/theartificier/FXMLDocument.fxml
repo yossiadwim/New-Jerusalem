@@ -6,9 +6,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,12 +20,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane prefHeight="692.0" prefWidth="607.0" styleClass="layout" stylesheets="@../../../../../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.Controller">
+<GridPane prefHeight="692.0" prefWidth="938.0" styleClass="layout" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.Controller">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="156.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="10.0" prefWidth="386.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="4.0" prefWidth="50.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="4.0" prefWidth="15.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="10.0" prefWidth="484.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="4.0" prefWidth="215.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="0.0" prefWidth="0.0" />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
@@ -44,7 +46,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Label fx:id="labelJumlah" prefHeight="17.0" prefWidth="288.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Label fx:id="labelJumlah" prefHeight="17.0" prefWidth="404.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
@@ -71,11 +73,14 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <TextField fx:id="places" onAction="#onEnter" prefHeight="42.0" prefWidth="364.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " />
+            <TextField fx:id="search" onAction="#onEnter" prefHeight="38.0" prefWidth="512.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : ">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin></TextField>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3" />
-      <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="52.0" stylesheets="@../../../../../style.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="50.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <styleClass>
             <String fx:value="transparent" />
             <String fx:value="button_hover" />
@@ -85,31 +90,37 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <graphic>
-            <ImageView fx:id="image" fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image" fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/search-icon.png" />
+               </image></ImageView>
          </graphic>
+         <GridPane.margin>
+            <Insets left="10.0" top="10.0" />
+         </GridPane.margin>
       </Button>
-      <TabPane fx:id="tp" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TabPane fx:id="tp" prefHeight="548.0" prefWidth="322.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <tabs>
-          <Tab fx:id="place" text="Place">
+          <Tab fx:id="tabPlace" text="Place">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="519.0" prefWidth="420.0">
                      <children>
-                        <ScrollPane fx:id="scrollpanePlace" prefHeight="520.0" prefWidth="386.0">
+                        <ScrollPane fx:id="scrollpanePlace" prefHeight="520.0" prefWidth="495.0">
                            <content>
-                              <AnchorPane fx:id="tampilAyatTempat" prefHeight="509.0" prefWidth="385.0" />
+                              <AnchorPane fx:id="tampilAyatTempat" prefHeight="521.0" prefWidth="495.0" />
                            </content>
                         </ScrollPane>
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="event" text="Event">
+          <Tab fx:id="tabEvent" text="Event">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="351.0">
                      <children>
-                        <ScrollPane fx:id="scrollpaneEvent" layoutY="-1.0" prefHeight="520.0" prefWidth="386.0">
+                        <ScrollPane fx:id="scrollpaneEvent" layoutY="-1.0" prefHeight="522.0" prefWidth="495.0">
                           <content>
-                            <AnchorPane fx:id="tampilAyatEvent" minHeight="0.0" minWidth="0.0" prefWidth="385.0" />
+                            <AnchorPane fx:id="tampilAyatEvent" minHeight="0.0" minWidth="0.0" prefWidth="503.0" />
                           </content>
                         </ScrollPane>
                      </children>
@@ -117,6 +128,36 @@
             </content>
           </Tab>
         </tabs>
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
       </TabPane>
+      <SplitPane dividerPositions="0.4652014652014652" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label layoutX="5.0" layoutY="3.0" text="People" />
+                  <ScrollPane fx:id="scrollpanePeople" layoutX="-2.0" layoutY="25.0" prefHeight="227.0" prefWidth="226.0">
+                    <content>
+                      <AnchorPane fx:id="tampilJumlahPeople" minHeight="0.0" minWidth="0.0" prefWidth="224.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label layoutX="5.0" layoutY="11.0" text="Places" />
+                  <ScrollPane fx:id="scrollpanePlaces" layoutX="-1.0" layoutY="32.0" prefHeight="258.0" prefWidth="224.0">
+                    <content>
+                      <AnchorPane fx:id="tampilJumlahPlaces" minHeight="0.0" minWidth="0.0" prefWidth="224.0" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+        </items>
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </SplitPane>
    </children>
 </GridPane>
