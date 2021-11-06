@@ -1,3 +1,4 @@
+
 package id.ac.ukdw.fti.rpl.theartificier.modal;
 
 import javafx.scene.control.Label;
@@ -19,5 +20,4 @@ public class BarVisualisasi {
     public Label getLbl() {
         return lbl;
     }
-
 }

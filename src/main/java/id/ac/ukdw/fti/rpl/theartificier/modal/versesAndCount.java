@@ -1,3 +1,4 @@
+
 package id.ac.ukdw.fti.rpl.theartificier.modal;
 
 public class VersesAndCount {
@@ -49,5 +50,4 @@ public class VersesAndCount {
     public String getPasal() {
         return pasal;
     }
-
 }
