@@ -7,6 +7,10 @@ Anggota Kelompok:
   3. Daniel Kusuma Pratama 71190475
 
 SS Aplikasi:
-![image](https://user-images.githubusercontent.com/89924013/139591347-e3e62ac4-a9b9-4858-9a00-11e0c7fc7419.png)
 
-![image](https://user-images.githubusercontent.com/89924013/139591371-4ee9c4f8-1589-4ad9-a797-f923ae00a6a2.png)
+![image](https://user-images.githubusercontent.com/89827933/140637293-ebfba7ff-96fc-48b6-b7f7-4f54a6e24c0f.png)
+
+![image](https://user-images.githubusercontent.com/89827933/140637342-1b615e8d-a302-4f54-af56-df04183e0f70.png)
+
+![image](https://user-images.githubusercontent.com/89827933/140637358-653b9782-2430-47aa-91e8-e3bc8cdeb3f9.png)
+
