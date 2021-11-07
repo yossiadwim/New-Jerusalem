@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 public class ButtonLabel {
     private Button btn;
     private Label lbl;
+    
     public ButtonLabel(Button btn, Label lbl){
         this.btn = btn;
         this.lbl = lbl;

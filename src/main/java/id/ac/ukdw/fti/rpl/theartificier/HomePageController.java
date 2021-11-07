@@ -4,25 +4,41 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.ResourceBundle;
+
+
+
 import id.ac.ukdw.fti.rpl.theartificier.database.Database;
 import id.ac.ukdw.fti.rpl.theartificier.modal.BookChapterNum;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 
+
 public class HomePageController implements Initializable
 {
 
-    Database db = new Database();
+    
+    
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     
    
     @FXML
@@ -31,9 +47,6 @@ public class HomePageController implements Initializable
 
     @FXML
     private Button pindahHalaman;
-
-    // @FXML
-    // private AnchorPane tampilAyat;
 
     @FXML
     private ComboBox<String> pasal;
@@ -53,12 +66,22 @@ public class HomePageController implements Initializable
     @FXML
     private Label perikop;
 
-    
+    @FXML
+    private Button buttonKembali;
 
+    Database db = new Database();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        ArrayList<BookChapterNum> verse = db.versesFromStart();
+        ObservableList<String> hasilVerse = FXCollections.observableArrayList();
+
+        for(BookChapterNum isiVerse : verse){
+            hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse());
+        }
+        tampilAyat.setItems(hasilVerse);
 
 
         //kitab
@@ -69,9 +92,22 @@ public class HomePageController implements Initializable
             hasil.add(isi.getBook());
             
         }
-        kitab.setItems(hasil);  
+        kitab.setItems(hasil); 
 
     }
+
+    public void switchToScene(ActionEvent event)throws IOException{
+        root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setScene(scene);
+        stage.show();
+    }
+
+
+
 
     public void onClickSelectedKitab(ActionEvent event) {
         String kt = kitab.getSelectionModel().getSelectedItem();
@@ -106,14 +142,13 @@ public class HomePageController implements Initializable
             
             ArrayList<BookChapterNum> isiAyat = db.ayatHomePage(kt,ps,ayt);
             ObservableList<String> hasil3 = FXCollections.observableArrayList();
-    
+            
             
             for(BookChapterNum isi3 : isiAyat){
                 
                 hasil3.add(isi3.getOsisRef()+ "\n"+ isi3.getVerse());
             }
-            
-            // System.out.println(hasil3);
+
             tampilAyat.setItems(hasil3);
         }
         catch(Exception e){
@@ -121,5 +156,7 @@ public class HomePageController implements Initializable
         }
 
     }
+    
+    
 
 }

@@ -1,5 +1,6 @@
 package id.ac.ukdw.fti.rpl.theartificier;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,10 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 import id.ac.ukdw.fti.rpl.theartificier.database.Database;
-import id.ac.ukdw.fti.rpl.theartificier.modal.*;
+import id.ac.ukdw.fti.rpl.theartificier.modal.BarVisualisasi;
+import id.ac.ukdw.fti.rpl.theartificier.modal.ButtonLabel;
+import id.ac.ukdw.fti.rpl.theartificier.modal.EventHandle;
+import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -76,6 +84,11 @@ public class Controller{
 
     @FXML
     private AnchorPane tampilJumlahPlaces;
+
+        
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     Database db = new Database();
 
@@ -286,7 +299,7 @@ public class Controller{
         }
     }
 
-    private void addPeoplePlacesMap(String ayat){
+    protected void addPeoplePlacesMap(String ayat){
 
         VersesAndCount vac = db.viewVisualisasiUtama(ayat);
         if(vac.getPeopleCount() > 1){
@@ -355,7 +368,7 @@ public class Controller{
 		return temp;
 	}
     
-    private BarVisualisasi createBarVisualisasi(String id, double count, double jumlah, String keterangan){
+    protected BarVisualisasi createBarVisualisasi(String id, double count, double jumlah, String keterangan){
         double width = (count/jumlah) * maxRect;
         Rectangle rect = new Rectangle();
         rect.setWidth(width);
@@ -464,13 +477,23 @@ public class Controller{
         
         
     }
+    
+    public void switchToHomePage(ActionEvent event) throws IOException{
+        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
     private  void alertNotFound (ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initModality(Modality.APPLICATION_MODAL);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        // stage.getIcons().add(new Image("/img/appicon.png"));
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
        
         String olah = search.getText();
         alert.setTitle("New Jerusalem");
@@ -481,11 +504,11 @@ public class Controller{
     }
     
     private boolean alertEmpty(){
-        String olah = search.getText().toLowerCase();
+        String olah = search.getText();
         if(olah.isEmpty()){
             Alert alert = new Alert(AlertType.WARNING);
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-            // stage.getIcons().add(new Image("/img/appicon.png"));
+            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
             alert.setHeaderText(null);
             alert.setContentText("Pencarian masih kosong");
             alert.showAndWait();

@@ -4,8 +4,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -13,7 +11,7 @@
 <AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="642.0" prefWidth="801.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.HomePageController">
    <children>
       <ComboBox fx:id="kitab" layoutX="35.0" layoutY="73.0" onAction="#onClickSelectedKitab" prefWidth="150.0" promptText="Kitab" />
-      <Button fx:id="pindahHalaman" layoutX="594.0" layoutY="73.0" mnemonicParsing="false" text="Pencarian Places dan Event" />
+      <Button fx:id="pindahHalaman" layoutX="594.0" layoutY="73.0" mnemonicParsing="false" onAction="#switchToScene" text="Pencarian Places dan Event" />
       <Text id="title" fill="#388087" layoutX="35.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
          <font>
             <Font name="System Bold Italic" size="22.0" />
@@ -26,31 +24,7 @@
       </Text>
       <ComboBox fx:id="pasal" layoutX="201.0" layoutY="73.0" onAction="#onClickSelectedPasal" prefHeight="26.0" prefWidth="177.0" promptText="Pasal" />
       <ComboBox fx:id="ayat" layoutX="401.0" layoutY="73.0" onAction="#onClickSelectedAyat" prefWidth="150.0" promptText="Ayat" />
-      <SplitPane dividerPositions="0.4949596774193549" layoutX="574.0" layoutY="143.0" orientation="VERTICAL" prefHeight="466.0" prefWidth="200.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <ScrollPane layoutX="-1.0" layoutY="29.0" prefHeight="198.0" prefWidth="200.0">
-                    <content>
-                      <AnchorPane fx:id="visualisasiPlaces" minHeight="0.0" minWidth="0.0" prefHeight="226.0" prefWidth="200.0" />
-                    </content>
-                  </ScrollPane>
-                  <Label layoutX="14.0" layoutY="5.0" prefHeight="16.0" prefWidth="35.0" text="Label" />
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="198.0">
-               <children>
-                  <ScrollPane layoutX="-1.0" layoutY="34.0" prefHeight="198.0" prefWidth="200.0">
-                    <content>
-                      <AnchorPane fx:id="visualisasiEvents" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-                    </content>
-                  </ScrollPane>
-                  <Label layoutX="14.0" layoutY="1.0" prefHeight="26.0" prefWidth="46.0" text="Label" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-      <ListView fx:id="tampilAyat" layoutX="34.0" layoutY="149.0" maxWidth="450.0" minWidth="100.0" prefHeight="466.0" prefWidth="511.0" AnchorPane.bottomAnchor="26.600000000000023" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="255.79999999999995" AnchorPane.topAnchor="149.0" />
+      <ListView fx:id="tampilAyat" layoutX="34.0" layoutY="149.0" maxWidth="736.0" minWidth="100.0" prefHeight="466.0" prefWidth="736.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="149.0" />
       <Label fx:id="perikop" layoutX="208.0" layoutY="116.0" prefHeight="18.0" prefWidth="167.0" />
    </children>
 </AnchorPane>

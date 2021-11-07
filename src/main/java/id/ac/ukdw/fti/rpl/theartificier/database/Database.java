@@ -51,8 +51,6 @@ public class Database {
             
             // loop through the result set
             while (rs.next()) {
-//                subHasil.add(rs.getString("verses"));
-//                subHasil.add(rs.getInt("verseCount"));
                 hasil.add(new VersesAndCount(rs.getString("Verses"), rs.getInt("verseCount")));
             }
             return hasil;
@@ -155,63 +153,18 @@ public class Database {
         }
     }
 
-    // public ArrayList ayatHomePage(String chapter, int ayat){
-    //     String query = "SELECT osisRef,verseText,chapter,verseNum FROM verses where chapter = '"+ chapter+"'";
-    //     ArrayList<String> hasil = new ArrayList<String>();
-    //     try (Connection conn = DriverManager.getConnection(url);
-    //          Statement stmt  = conn.createStatement();
-    //          ResultSet rs    = stmt.executeQuery(query)){
-    //         while (rs.next()) {
-    //             if(ayat <= rs.getInt("verseNum")){
-    //                 hasil.add(rs.getString("osisRef"));
-    //             }
-                
-                
-    //         }
-    //         return hasil;
-    //     } 
-    //     catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    //     return hasil;
-    // }
-
-    public int lenAyat(String chapter){
-        String query = "SELECT verseNum from verses WHERE chapter = '"+ chapter+"'";
-        ArrayList<Integer> ayat = new ArrayList<Integer>();
-
-        try (Connection conn = DriverManager.getConnection(url);
-        Statement stmt  = conn.createStatement();
-        ResultSet rs    = stmt.executeQuery(query)){
-
-            while(rs.next()){
-                ayat.add(rs.getInt("verseNum"));
-            }
-            return ayat.size();
-
-        }
-        catch(SQLException e){
-            e.getMessage();
-        }
-        return ayat.size();
-    }
-
     public ArrayList ayatHomePage(String book, String pasal, int ayat){
         String query = "SELECT osisRef, verseNum, verseText FROM verses where book = '"+ book+"' AND chapter = '"+ pasal +"'";
         ArrayList<BookChapterNum> hasil = new ArrayList<BookChapterNum>();
-        System.out.println(lenAyat(pasal));
+        
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(query)){
             while (rs.next()) {
                 
-                if(ayat != lenAyat(pasal)+1){
-                    
-                    hasil.add(new BookChapterNum(rs.getString("osisRef"),rs.getInt("verseNum"), rs.getString("verseText")));
-                    
-                    
-                }
-                  
+                if(rs.getInt("verseNum") >= ayat){ 
+                     hasil.add(new BookChapterNum(rs.getString("osisRef"),rs.getInt("verseNum"), rs.getString("verseText")));
+                }      
             }
             return hasil; 
         } 
@@ -277,6 +230,24 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return num;
+    }
+
+    public ArrayList versesFromStart(){
+        String query = "SELECT osisRef, verseNum, verseText FROM verses";
+        ArrayList<BookChapterNum> verse = new ArrayList<BookChapterNum>();
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            
+            while(rs.next()){
+                verse.add(new BookChapterNum(rs.getString("osisRef"),rs.getInt("verseNum"),rs.getString("verseText")));
+            }
+            return verse;
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return verse;
     }
 
 }

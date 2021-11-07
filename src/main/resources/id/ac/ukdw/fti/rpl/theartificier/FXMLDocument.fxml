@@ -45,6 +45,9 @@
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
+         <children>
+            <Button fx:id="buttonKembali" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="26.0" prefWidth="268.0" text="ke Home Page" GridPane.columnIndex="1" />
+         </children>
       </GridPane>
       <Label fx:id="labelJumlah" prefHeight="17.0" prefWidth="404.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
