@@ -36,7 +36,7 @@
       <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <Label fx:id="labelJumlah" prefHeight="17.0" prefWidth="404.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <Label fx:id="labelJumlah" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="540.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="50.0" />
          </GridPane.margin>
@@ -94,9 +94,9 @@
         <tabs>
           <Tab fx:id="tabPlace" text="Place">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane prefHeight="512.0" prefWidth="602.0">
                      <children>
-                        <ListView fx:id="listViewPlace" layoutX="-3.0" layoutY="-1.0" prefHeight="521.0" prefWidth="612.0" />
+                        <ListView fx:id="listViewPlace" layoutX="-1.0" layoutY="-1.0" prefHeight="522.0" prefWidth="602.0" />
                      </children>
                   </AnchorPane>
                </content>

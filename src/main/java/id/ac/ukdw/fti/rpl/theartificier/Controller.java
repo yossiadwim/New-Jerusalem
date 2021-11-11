@@ -202,19 +202,22 @@ public class Controller{
     
                 ObservableList<String> tampilEvent = FXCollections.observableArrayList();
                 for(EventHandle isi2 : hasilEvent){
-                    try{
-                        String[] splitEvent = isi2.getVerses().split(",");
-                        for(String ayatEvent : splitEvent){
-                            tampilEvent.add(ayatEvent +"\n"+cekAyat(ayatEvent));
-                            addPeoplePlacesMap(ayatEvent);
+                    if(isi2.getVerses() != null){
+                        try{
+                            String[] splitEvent = isi2.getVerses().split(",");
+                            for(String ayatEvent : splitEvent){
+                                tampilEvent.add(ayatEvent +"\n"+cekAyat(ayatEvent));
+                                addPeoplePlacesMap(ayatEvent);
+                                count++;
+                            }
+                        }
+                        catch(Exception e){
+                            tampilEvent.add(isi2.getVerses()+"\n"+isi2.getVerses());
+                            addPeoplePlacesMap(isi2.getVerses());
                             count++;
                         }
-                    }
-                    catch(Exception e){
-                        tampilEvent.add(isi2.getVerses()+"\n"+isi2.getVerses());
-                        addPeoplePlacesMap(isi2.getVerses());
-                        count++;
-                    }
+                    }   
+
                 }
                 listViewEvent.setItems(tampilEvent);
                 labelJumlah.setText(count + " hasil pencarian telah ditemukan untuk " + '"'+search.getText()+'"');
@@ -290,18 +293,22 @@ public class Controller{
                 for(String j: splitPeople){
                     try{
                         peopleMap.put(j, peopleMap.get(j)+1);
+                        peopleMap.remove(null);
                     }
                     catch(Exception e){
                         peopleMap.put(j, 1);
+                        peopleMap.remove(null);
                     }
                 }
             }
             else{
                 try{
                     peopleMap.put(vac.getPeople(), peopleMap.get(vac.getPeople())+1);
+                    peopleMap.remove(null);
                 }
                 catch(Exception e){
                     peopleMap.put(vac.getPeople(), 1);
+                    peopleMap.remove(null);
                 }
             }
         }
@@ -315,18 +322,22 @@ public class Controller{
                 for(String j: splitPlaces){
                     try{
                         placesMap.put(j, placesMap.get(j)+1);
+                        placesMap.remove(null);
                     }
                     catch(Exception e){
                         placesMap.put(j, 1);
+                        placesMap.remove(null);
                     }
                 }
             }
             else{
                 try{
                     placesMap.put(vac.getPlaces(), placesMap.get(vac.getPlaces())+1);
+                    placesMap.remove(null);
                 }
                 catch(Exception e){
                     placesMap.put(vac.getPlaces(), 1);
+                    placesMap.remove(null);
                 }
             }
         }
