@@ -8,9 +8,9 @@ Anggota Kelompok:
 
 SS Aplikasi:
 
-![image](https://user-images.githubusercontent.com/89827933/140637293-ebfba7ff-96fc-48b6-b7f7-4f54a6e24c0f.png)
+![image](https://user-images.githubusercontent.com/89827933/141354414-9710fe81-ac06-426b-9f62-934aa6916bb1.png)
 
-![image](https://user-images.githubusercontent.com/89827933/140637342-1b615e8d-a302-4f54-af56-df04183e0f70.png)
+![image](https://user-images.githubusercontent.com/89827933/141355344-a7c621a9-2347-477b-bae8-1b2f140c3aa8.png)
 
-![image](https://user-images.githubusercontent.com/89827933/140637358-653b9782-2430-47aa-91e8-e3bc8cdeb3f9.png)
+![image](https://user-images.githubusercontent.com/89827933/141355385-62ac0656-1acc-4304-a982-47f952f9fd22.png)
 
