@@ -9,12 +9,15 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import id.ac.ukdw.fti.rpl.theartificier.database.Database;
 import id.ac.ukdw.fti.rpl.theartificier.modal.BarVisualisasi;
 import id.ac.ukdw.fti.rpl.theartificier.modal.ButtonLabel;
 import id.ac.ukdw.fti.rpl.theartificier.modal.EventHandle;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -26,6 +29,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -84,6 +88,12 @@ public class Controller{
 
     @FXML
     private AnchorPane tampilJumlahPlaces;
+
+    @FXML
+    private ListView<String> listViewPlace;
+
+    @FXML
+    private ListView listViewEvent;
 
         
     private Stage stage;
@@ -164,183 +174,166 @@ public class Controller{
             olahEvent = String.valueOf(olahEvent.charAt(0)).toUpperCase() + olahEvent.substring(1).toLowerCase();
             ArrayList<EventHandle> hasilEvent = db.viewDataEvents(olahEvent);
 
-            int count = 1;
-            try{
+            ObservableList<String> tampilPlace = FXCollections.observableArrayList();
 
-                if(hasilPlace.isEmpty() && hasilEvent.isEmpty()){
+            
+            if(!hasilPlace.isEmpty() || !hasilEvent.isEmpty()){
 
-                    alertNotFound(event);
-                }
-
-                else{
-
-                    for (VersesAndCount verse : hasilPlace) {
-                        
-                        if(verse.getVerseCount() > 1){
-
-                            String[] split = verse.getVerses().split(",");
-                            for(String i: split){
-                                
-                                ButtonLabel btn = createButtonLabel(i);
-                                addPeoplePlacesMap(i);
-                                buttonPlace.add(btn.getButton());
-                                labelPlace.add(btn.getLabel());
-                                count += 1;
-                            }
-                        }   
-                        else{
-                            
-                            ButtonLabel btn = createButtonLabel(verse.getVerses());
-                            addPeoplePlacesMap(verse.getVerses());
-                            buttonPlace.add(btn.getButton());
-                            labelPlace.add(btn.getLabel());
-                            count += 1;
+                int count = 0;
+                for(VersesAndCount isi : hasilPlace){
+                    try{
+                        String[] splitPlace = isi.getVerses().split(",");
+                        for (String ayatPlace :splitPlace){
+                            tampilPlace.add(ayatPlace+"\n"+cekAyat(ayatPlace));
+                            addPeoplePlacesMap(ayatPlace);
+                            count++;
                         }
                     }
-                    layoutY = 14;
-
-                    for (EventHandle events: hasilEvent) {
-
-                        if(events.getVerses() != null){
-                            String[] splitEvent = events.getVerses().split(",");
-                            if(splitEvent.length > 1){
-                                for (String a : splitEvent) {
-                                    ButtonLabel button = createButtonLabel(events.getTitle()+", " + a);
-                                    addPeoplePlacesMap(a);
-                                    buttonEvent.add(button.getButton()); 
-                                    labelEvent.add(button.getLabel());
-                                    count +=1;
-                                }
-                                
-                            }
-                            
-                            else{
-                                ButtonLabel button = createButtonLabel(events.getTitle() + ", " + events.getVerses());
-                                addPeoplePlacesMap(events.getVerses());
-                                buttonEvent.add(button.getButton());
-                                labelEvent.add(button.getLabel());
-                                count +=1;
-                            } 
-                        }   
+                    catch(Exception e){
+                        tampilPlace.add(isi.getVerses()+"\n"+cekAyat(isi.getVerses()));
+                        addPeoplePlacesMap(isi.getVerses());
+                        count++;
                     }
-
-                    labelJumlah.setText(count - 1+ " hasil telah ditemukan untuk '" + search.getText() + "'");
+       
                 }
-            }
-            catch(Exception e){
-                e.getMessage();
+                listViewPlace.setItems(tampilPlace);
+
+    
+    
+                ObservableList<String> tampilEvent = FXCollections.observableArrayList();
+                for(EventHandle isi2 : hasilEvent){
+                    try{
+                        String[] splitEvent = isi2.getVerses().split(",");
+                        for(String ayatEvent : splitEvent){
+                            tampilEvent.add(ayatEvent +"\n"+cekAyat(ayatEvent));
+                            addPeoplePlacesMap(ayatEvent);
+                            count++;
+                        }
+                    }
+                    catch(Exception e){
+                        tampilEvent.add(isi2.getVerses()+"\n"+isi2.getVerses());
+                        addPeoplePlacesMap(isi2.getVerses());
+                        count++;
+                    }
+                }
+                listViewEvent.setItems(tampilEvent);
+                labelJumlah.setText(count + " hasil pencarian telah ditemukan untuk " + '"'+search.getText()+'"');
+    
+    
+                if(hasilPlace.isEmpty()){
+                    tp.getSelectionModel().select(tabEvent);
+                }
+                else if(hasilEvent.isEmpty()){
+                    tp.getSelectionModel().select(tabPlace);
+                }
+                else if(hasilEvent != null && hasilPlace != null){
+                    tp.getSelectionModel().select(tabPlace);
+                }
+    
+    
+                Map<String, Integer> sortedPeopleMap = sortByValue(peopleMap);
+                Map<String, Integer> sortedPlacesMap = sortByValue(placesMap);
+    
+                sortedPeopleMap.remove(null);
+                sortedPlacesMap.remove(null);
                 
+                // mulai hitung jumlah
+                List<Map.Entry<String, Integer> > listPeople = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
+                for (Map.Entry<String, Integer> peopleCount : listPeople) {
+                    peopleCountMap += peopleCount.getValue();
+                }
+    
+                List<Map.Entry<String, Integer> > listPlaces = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
+                for (Map.Entry<String, Integer> placesCount : listPlaces) {
+                    placesCountMap += placesCount.getValue();
+                }
+                // berhenti hitung jumlah
+    
+                // mulai buat bar visualisasi
+                List<Map.Entry<String, Integer> > listPeople2 = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
+    
+                for (Map.Entry<String, Integer> peopleCount : listPeople) {
+                    BarVisualisasi barPeople = createBarVisualisasi(peopleCount.getKey(), peopleCount.getValue(), peopleCountMap, "people");
+                    rectPeople.add(barPeople.getRect());
+                    labelRectPeople.add(barPeople.getLbl());
+                   
+                }
+    
+                List<Map.Entry<String, Integer> > listPlaces2 = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
+                for (Map.Entry<String, Integer> placesCount : listPlaces) {
+                    BarVisualisasi barPlaces = createBarVisualisasi(placesCount.getKey(), placesCount.getValue(), placesCountMap, "places");
+                    rectPlaces.add(barPlaces.getRect());
+                    labelRectPlaces.add(barPlaces.getLbl());
+                }
+                // berhenti buat bar visualisasi
+    
+                tampilJumlahPeople.getChildren().clear();
+                tampilJumlahPeople.getChildren().addAll(rectPeople);
+                tampilJumlahPeople.getChildren().addAll(labelRectPeople);
+    
+                tampilJumlahPlaces.getChildren().clear();
+                tampilJumlahPlaces.getChildren().addAll(rectPlaces);
+                tampilJumlahPlaces.getChildren().addAll(labelRectPlaces);
             }
-
-            tampilAyatTempat.getChildren().clear();
-            tampilAyatTempat.getChildren().addAll(buttonPlace);
-            tampilAyatTempat.getChildren().addAll(labelPlace);
-        
-            tampilAyatEvent.getChildren().clear();
-            tampilAyatEvent.getChildren().addAll(buttonEvent);
-            tampilAyatEvent.getChildren().addAll(labelEvent);
-
-
-            if(hasilPlace.isEmpty()){
-                tp.getSelectionModel().select(tabEvent);
+            else{
+                alertNotFound(event);
             }
-            else if(hasilEvent.isEmpty()){
-                tp.getSelectionModel().select(tabPlace);
-            }
-            else if(hasilEvent != null && hasilPlace != null){
-                tp.getSelectionModel().select(tabPlace);
-            }
-
-
-            Map<String, Integer> sortedPeopleMap = sortByValue(peopleMap);
-            Map<String, Integer> sortedPlacesMap = sortByValue(placesMap);
-
-            sortedPeopleMap.remove(null);
-            sortedPlacesMap.remove(null);
-            
-            // mulai hitung jumlah
-            List<Map.Entry<String, Integer> > listPeople = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
-            for (Map.Entry<String, Integer> peopleCount : listPeople) {
-                peopleCountMap += peopleCount.getValue();
-            }
-
-            List<Map.Entry<String, Integer> > listPlaces = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
-            for (Map.Entry<String, Integer> placesCount : listPlaces) {
-                placesCountMap += placesCount.getValue();
-            }
-            // berhenti hitung jumlah
-
-            // mulai buat bar visualisasi
-            List<Map.Entry<String, Integer> > listPeople2 = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
-
-            for (Map.Entry<String, Integer> peopleCount : listPeople) {
-                BarVisualisasi barPeople = createBarVisualisasi(peopleCount.getKey(), peopleCount.getValue(), peopleCountMap, "people");
-                rectPeople.add(barPeople.getRect());
-                labelRectPeople.add(barPeople.getLbl());
-               
-            }
-
-            List<Map.Entry<String, Integer> > listPlaces2 = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
-            for (Map.Entry<String, Integer> placesCount : listPlaces) {
-                BarVisualisasi barPlaces = createBarVisualisasi(placesCount.getKey(), placesCount.getValue(), placesCountMap, "places");
-                rectPlaces.add(barPlaces.getRect());
-                labelRectPlaces.add(barPlaces.getLbl());
-            }
-            // berhenti buat bar visualisasi
-
-            tampilJumlahPeople.getChildren().clear();
-            tampilJumlahPeople.getChildren().addAll(rectPeople);
-            tampilJumlahPeople.getChildren().addAll(labelRectPeople);
-
-            tampilJumlahPlaces.getChildren().clear();
-            tampilJumlahPlaces.getChildren().addAll(rectPlaces);
-            tampilJumlahPlaces.getChildren().addAll(labelRectPlaces);
-
         }
     }
 
     protected void addPeoplePlacesMap(String ayat){
 
         VersesAndCount vac = db.viewVisualisasiUtama(ayat);
-        if(vac.getPeopleCount() > 1){
-            String[] splitPeople = vac.getPeople().split(",");
-            for(String j: splitPeople){
+        try{
+            if(vac.getPeopleCount() > 1){
+                String[] splitPeople = vac.getPeople().split(",");
+                for(String j: splitPeople){
+                    try{
+                        peopleMap.put(j, peopleMap.get(j)+1);
+                    }
+                    catch(Exception e){
+                        peopleMap.put(j, 1);
+                    }
+                }
+            }
+            else{
                 try{
-                    peopleMap.put(j, peopleMap.get(j)+1);
+                    peopleMap.put(vac.getPeople(), peopleMap.get(vac.getPeople())+1);
                 }
                 catch(Exception e){
-                    peopleMap.put(j, 1);
+                    peopleMap.put(vac.getPeople(), 1);
                 }
             }
         }
-        else{
-            try{
-                peopleMap.put(vac.getPeople(), peopleMap.get(vac.getPeople())+1);
-            }
-            catch(Exception e){
-                peopleMap.put(vac.getPeople(), 1);
-            }
+        catch(Exception e){
+            e.getMessage();
         }
 
-        if(vac.getPlacesCount() > 1){
-            String[] splitPlaces = vac.getPlaces().split(",");
-            for(String j: splitPlaces){
+        try{
+            if(vac.getPlacesCount() > 1){
+                String[] splitPlaces = vac.getPlaces().split(",");
+                for(String j: splitPlaces){
+                    try{
+                        placesMap.put(j, placesMap.get(j)+1);
+                    }
+                    catch(Exception e){
+                        placesMap.put(j, 1);
+                    }
+                }
+            }
+            else{
                 try{
-                    placesMap.put(j, placesMap.get(j)+1);
+                    placesMap.put(vac.getPlaces(), placesMap.get(vac.getPlaces())+1);
                 }
                 catch(Exception e){
-                    placesMap.put(j, 1);
+                    placesMap.put(vac.getPlaces(), 1);
                 }
             }
         }
-        else{
-            try{
-                placesMap.put(vac.getPlaces(), placesMap.get(vac.getPlaces())+1);
-            }
-            catch(Exception e){
-                placesMap.put(vac.getPlaces(), 1);
-            }
+        catch(Exception e){
+            e.getMessage();
         }
+
     }
     
 
@@ -410,73 +403,6 @@ public class Controller{
         return hasil;
     }
     
-    private ButtonLabel createButtonLabel(String ayat){
-
-        try{
-
-            String[] ayatSplit = ayat.split(", ");
-            Button btn = new Button(ayat+":");
-            Label lbl = new Label();
-            String isiAyat = cekAyat(ayatSplit[1]);
-            int lenIsiAyat = isiAyat.length();
-            
-            btn.setLayoutX(7);
-            lbl.setLayoutX(0);
-            btn.setLayoutY(layoutY);
-            layoutY += 20;
-            lbl.setLayoutY(layoutY);
-            btn.setStyle("-fx-background-color: transparent; -fx-text-fill: blue; -fx-underline: true");
-            
-            double lebar = lenIsiAyat/39;
-
-            if(lebar == 0.0){
-                lebar = 1;
-            }
-
-            lbl.setPrefHeight(lebar * 20);
-            layoutY += (lebar * 20) + 13;
-
-            lbl.setPadding(new javafx.geometry.Insets(0, 20, 0, 10));
-            lbl.setText(isiAyat);
-            lbl.setWrapText(true);
-            lbl.setPrefWidth(490);
-            lbl.setEllipsisString(null);
-            
-            ButtonLabel btnLbl = new ButtonLabel(btn, lbl);
-            return btnLbl;
-
-            
-        }
-        
-        catch(Exception e){
-
-            Button btn = new Button(ayat);
-            Label lbl = new Label();
-            String isiAyat = cekAyat(ayat);
-            int lenIsiAyat = isiAyat.length();
-            btn.setLayoutX(7);
-            lbl.setLayoutX(0);
-            btn.setLayoutY(layoutY);
-            layoutY += 20;
-            lbl.setLayoutY(layoutY);
-            btn.setStyle("-fx-background-color: transparent; -fx-text-fill: blue; -fx-underline: true");
-            
-            double lebar = lenIsiAyat/39;
-            lbl.setPrefHeight(lebar * 20);
-            layoutY += (lebar * 20) + 13;
-            lbl.setPadding(new javafx.geometry.Insets(0, 20, 0, 10));
-            lbl.setText(isiAyat);
-            lbl.setWrapText(true);
-            lbl.setPrefWidth(490);
-            lbl.setEllipsisString(null);
-            
-            ButtonLabel btnLbl = new ButtonLabel(btn, lbl);
-            return btnLbl;
-            
-        }
-        
-        
-    }
     
     public void switchToHomePage(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
@@ -516,4 +442,6 @@ public class Controller{
         }
         return true;
     }
+
+    
 }
