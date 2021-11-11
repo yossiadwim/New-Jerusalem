@@ -27,3 +27,10 @@
     -fx-background-color:#badfe7 !important;
 
 }
+
+ComboBox{
+    -fx-background-color: #388087;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fefbe9;
+}

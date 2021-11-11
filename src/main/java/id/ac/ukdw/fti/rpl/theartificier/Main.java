@@ -4,6 +4,7 @@ package id.ac.ukdw.fti.rpl.theartificier;
 import java.io.File;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.css.Style;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ public class Main extends Application {
         stage.setTitle("New Jerusalem");
 
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("resources/id/ac/ukdw/fti/rpl/theartificier/style.css");
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
         stage.setScene(scene);
         stage.show();
