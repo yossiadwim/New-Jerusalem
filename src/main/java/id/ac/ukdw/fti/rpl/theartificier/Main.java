@@ -24,6 +24,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("resources/id/ac/ukdw/fti/rpl/theartificier/style.css");
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

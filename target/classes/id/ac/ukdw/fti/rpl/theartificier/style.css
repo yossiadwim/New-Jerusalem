@@ -29,8 +29,9 @@
 }
 
 ComboBox{
-    -fx-background-color: #388087;
+    -fx-background-color: #5fa7ad;
     -fx-font-size: 12;
     -fx-font-weight: bold;
-    -fx-text-fill: #fefbe9;
+    -fx-text-fill: #ffffff;
+
 }

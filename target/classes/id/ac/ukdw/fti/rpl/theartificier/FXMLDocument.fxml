@@ -135,6 +135,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <TextField fx:id="search" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="search" alignment="CENTER" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>

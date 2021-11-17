@@ -9,6 +9,8 @@ public class VersesAndCount {
     private String places;
     private int placesCount;
     private String pasal;
+    private String title;
+
 
     public VersesAndCount(String pasal){
         this.pasal = pasal;
@@ -49,4 +51,9 @@ public class VersesAndCount {
     public String getPasal() {
         return pasal;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
 }

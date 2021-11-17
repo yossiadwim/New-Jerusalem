@@ -40,9 +40,9 @@ public class Database {
      * @param args the command line arguments 
      */  
     public ArrayList viewDataPlace(String title){
-//        String sql = "select * from places limit 1;";
+
         String query = "SELECT verses, verseCount from places WHERE displayTitle = '"+title+"'";
-        System.out.println(query);
+        
         ArrayList<VersesAndCount> hasil = new ArrayList<VersesAndCount>();
         
         try (Connection conn = DriverManager.getConnection(url);
@@ -63,7 +63,7 @@ public class Database {
     public ArrayList viewDataEvents(String title){
         // ArrayList<versesAndCount> hasil = new ArrayList<versesAndCount>();
         String query = "SELECT events.title, events.startDate, events.duration, events.verses from events WHERE title like '%"+title+"%'"; 
-        System.out.println(query);
+        
 
         ArrayList <EventHandle> hasil = new ArrayList<EventHandle>();
         try (Connection conn = DriverManager.getConnection(url);

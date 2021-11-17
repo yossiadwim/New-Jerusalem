@@ -79,7 +79,7 @@ public class HomePageController implements Initializable
         ObservableList<String> hasilVerse = FXCollections.observableArrayList();
 
         for(BookChapterNum isiVerse : verse){
-            hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse());
+            hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
         }
         tampilAyat.setItems(hasilVerse);
 
@@ -102,6 +102,7 @@ public class HomePageController implements Initializable
         stage.setTitle("New Jerusalem");
         scene = new Scene(root);
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

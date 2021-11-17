@@ -184,19 +184,20 @@ public class Controller{
                     try{
                         String[] splitPlace = isi.getVerses().split(",");
                         for (String ayatPlace :splitPlace){
-                            tampilPlace.add(ayatPlace+"\n"+cekAyat(ayatPlace));
+                            tampilPlace.add(ayatPlace+"\n"+cekAyat(ayatPlace)+"\n"+" ");
                             addPeoplePlacesMap(ayatPlace);
                             count++;
                         }
                     }
                     catch(Exception e){
-                        tampilPlace.add(isi.getVerses()+"\n"+cekAyat(isi.getVerses()));
+                        tampilPlace.add(isi.getVerses()+"\n"+cekAyat(isi.getVerses())+"\n"+" ");
                         addPeoplePlacesMap(isi.getVerses());
                         count++;
                     }
        
                 }
                 listViewPlace.setItems(tampilPlace);
+                
 
     
     
@@ -206,13 +207,13 @@ public class Controller{
                         try{
                             String[] splitEvent = isi2.getVerses().split(",");
                             for(String ayatEvent : splitEvent){
-                                tampilEvent.add(ayatEvent +"\n"+cekAyat(ayatEvent));
+                                tampilEvent.add(isi2.getTitle()+"\n\n"+ayatEvent+":"+"\n"+cekAyat(ayatEvent)+"\n"+" ");
                                 addPeoplePlacesMap(ayatEvent);
                                 count++;
                             }
                         }
                         catch(Exception e){
-                            tampilEvent.add(isi2.getVerses()+"\n"+isi2.getVerses());
+                            tampilEvent.add(isi2.getTitle()+"\n\n"+isi2.getVerses()+":"+"\n"+cekAyat(isi2.getVerses())+"\n"+" ");
                             addPeoplePlacesMap(isi2.getVerses());
                             count++;
                         }
