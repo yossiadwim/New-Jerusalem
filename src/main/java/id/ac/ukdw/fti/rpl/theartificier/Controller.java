@@ -184,13 +184,13 @@ public class Controller{
                     try{
                         String[] splitPlace = isi.getVerses().split(",");
                         for (String ayatPlace :splitPlace){
-                            tampilPlace.add(ayatPlace+"\n"+cekAyat(ayatPlace)+"\n"+" ");
+                            tampilPlace.add(ayatPlace+"\n"+wrapText(cekAyat(ayatPlace)) + "\n ");
                             addPeoplePlacesMap(ayatPlace);
                             count++;
                         }
                     }
                     catch(Exception e){
-                        tampilPlace.add(isi.getVerses()+"\n"+cekAyat(isi.getVerses())+"\n"+" ");
+                        tampilPlace.add(isi.getVerses()+"\n"+wrapText(cekAyat(isi.getVerses()) + "\n "));
                         addPeoplePlacesMap(isi.getVerses());
                         count++;
                     }
@@ -207,13 +207,13 @@ public class Controller{
                         try{
                             String[] splitEvent = isi2.getVerses().split(",");
                             for(String ayatEvent : splitEvent){
-                                tampilEvent.add(isi2.getTitle()+"\n\n"+ayatEvent+":"+"\n"+cekAyat(ayatEvent)+"\n"+" ");
+                                tampilEvent.add(ayatEvent +"\n"+wrapText(cekAyat(ayatEvent)) + "\n ");
                                 addPeoplePlacesMap(ayatEvent);
                                 count++;
                             }
                         }
                         catch(Exception e){
-                            tampilEvent.add(isi2.getTitle()+"\n\n"+isi2.getVerses()+":"+"\n"+cekAyat(isi2.getVerses())+"\n"+" ");
+                            tampilEvent.add(isi2.getVerses()+"\n"+wrapText(isi2.getVerses()) + "\n ");
                             addPeoplePlacesMap(isi2.getVerses());
                             count++;
                         }
@@ -283,6 +283,25 @@ public class Controller{
                 alertNotFound(event);
             }
         }
+    }
+
+    private String wrapText(String text){
+        String[] split = text.split(" ");
+        int count = 0;
+        int check = 82;
+        String output = "";
+        for(String i: split){
+            if(count+i.length() + 1 > check){
+                output += "\n";
+                output += i;
+                check += 82;
+            }
+            else{
+                output += i + " ";
+            }
+            count+=i.length();
+        }
+        return output;
     }
 
     protected void addPeoplePlacesMap(String ayat){

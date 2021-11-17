@@ -74,12 +74,13 @@ public class HomePageController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        
         ArrayList<BookChapterNum> verse = db.versesFromStart();
         ObservableList<String> hasilVerse = FXCollections.observableArrayList();
 
         for(BookChapterNum isiVerse : verse){
-            hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
+            // hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
+            hasilVerse.add(isiVerse.getOsisRef()+"\n"+wrapText(isiVerse.getVerse())+"\n"+" ");
         }
         tampilAyat.setItems(hasilVerse);
 
@@ -94,6 +95,25 @@ public class HomePageController implements Initializable
         }
         kitab.setItems(hasil); 
 
+    }
+
+    private String wrapText(String text){
+        String[] split = text.split(" ");
+        int count = 0;
+        int check = 117;
+        String output = "";
+        for(String i: split){
+            if(count+i.length() + 1 > check){
+                output += "\n";
+                output += i;
+                check += 117;
+            }
+            else{
+                output += i + " ";
+            }
+            count+=i.length();
+        }
+        return output;
     }
 
     public void switchToScene(ActionEvent event)throws IOException{
@@ -147,7 +167,7 @@ public class HomePageController implements Initializable
             
             for(BookChapterNum isi3 : isiAyat){
                 
-                hasil3.add(isi3.getOsisRef()+ "\n"+ isi3.getVerse());
+                hasil3.add(isi3.getOsisRef()+ "\n"+ wrapText(isi3.getVerse()) + "\n ");
             }
 
             tampilAyat.setItems(hasil3);
