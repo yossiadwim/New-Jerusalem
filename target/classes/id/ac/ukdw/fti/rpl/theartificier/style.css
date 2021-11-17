@@ -14,7 +14,7 @@
     -fx-text-fill: #fefbe9;
 }
 .button:pressed{
-    -fx-background-color: #f0a04b;
+    -fx-background-color: #5fa7ad;
 }
 
 .transparent{

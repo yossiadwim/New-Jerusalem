@@ -14,7 +14,10 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <Button fx:id="pindahHalaman" layoutX="47.0" layoutY="76.0" mnemonicParsing="false" onAction="#switchToScene" stylesheets="@style.css" text="Pencarian Places dan Event" />
+      <Button fx:id="pindahHalaman" layoutX="47.0" layoutY="76.0" mnemonicParsing="false" onAction="#switchToScene" stylesheets="@style.css" text="Pencarian Places dan Event">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
       <Text id="title" fill="#388087" layoutX="65.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
          <font>
             <Font name="System Bold Italic" size="22.0" />

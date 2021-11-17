@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Database {
     // private final String url = "jdbc:sqlite:vizbible.sqlite";
     
-    private final String url = "jdbc:sqlite:New-Jerusalem/vizbible.sqlite";
+    private final String url = "jdbc:sqlite:vizbible.sqlite";
     private void connect() {  
         Connection conn = null;  
         try {  

@@ -64,10 +64,13 @@
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="buttonKembali" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="18.0" prefWidth="164.0" text="ke Home Page">
+            <Button fx:id="buttonKembali" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="18.0" prefWidth="164.0" stylesheets="@style.css" text="ke Home Page">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children></HBox>
       <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="33.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -135,6 +138,6 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <TextField fx:id="search" alignment="CENTER" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="search" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>
