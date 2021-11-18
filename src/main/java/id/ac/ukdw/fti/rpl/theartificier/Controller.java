@@ -1,6 +1,8 @@
 package id.ac.ukdw.fti.rpl.theartificier;
 
+
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
 
 import id.ac.ukdw.fti.rpl.theartificier.database.Database;
@@ -20,8 +23,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,13 +41,14 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class Controller{
+public class Controller implements Initializable{
 
     @FXML
     private Label labelJumlah;
@@ -100,7 +106,11 @@ public class Controller{
     private Scene scene;
     private Parent root;
 
-    Database db = new Database();
+    public static String click;
+    public static String judul;
+    public static String[] ayat;
+
+    static Database db = new Database();
 
     private List<Button> buttonPlace = new ArrayList<>();
     private List<Label> labelPlace = new ArrayList<>();
@@ -127,6 +137,17 @@ public class Controller{
     private int peopleCountMap, placesCountMap;
     private final double maxRect = 215;
     private final int heightRect = 29;
+    public static String searchInitialize = "";
+    
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        if(!searchInitialize.equals("")){
+            ControllerDetail.searchInitialize = searchInitialize;
+            search.setText(searchInitialize);
+            tampilHasilSearch();
+        }
+        
+    }
 
     @FXML
     public void onEnter(ActionEvent event){
@@ -138,7 +159,11 @@ public class Controller{
     //method dibawah di ekseskusi abis enter
     @FXML
     private void handleButtonAction(ActionEvent event){
-
+        tampilHasilSearch(event);
+    }
+    
+    // method dipanggil saat kembali dari HomePageController
+    private void tampilHasilSearch(){
         peopleCountMap = 0;
         placesCountMap = 0;
 
@@ -164,6 +189,8 @@ public class Controller{
         String olahPlace = search.getText().toLowerCase();
         String olahEvent = search.getText().toLowerCase();
 
+        ControllerDetail.searchInitialize = search.getText().toLowerCase();
+
         if(alertEmpty()){
             
             olahPlace = olahPlace.replace(" ", "-");
@@ -184,13 +211,13 @@ public class Controller{
                     try{
                         String[] splitPlace = isi.getVerses().split(",");
                         for (String ayatPlace :splitPlace){
-                            tampilPlace.add(ayatPlace+"\n"+wrapText(cekAyat(ayatPlace)) + "\n ");
+                            tampilPlace.add(ayatPlace+"\n"+wrapText(cekAyat(ayatPlace), 82, " ") + "\n ");
                             addPeoplePlacesMap(ayatPlace);
                             count++;
                         }
                     }
                     catch(Exception e){
-                        tampilPlace.add(isi.getVerses()+"\n"+wrapText(cekAyat(isi.getVerses()) + "\n "));
+                        tampilPlace.add(isi.getVerses()+"\n"+wrapText(cekAyat(isi.getVerses()), 82, " ") + "\n ");
                         addPeoplePlacesMap(isi.getVerses());
                         count++;
                     }
@@ -204,23 +231,248 @@ public class Controller{
                 ObservableList<String> tampilEvent = FXCollections.observableArrayList();
                 for(EventHandle isi2 : hasilEvent){
                     if(isi2.getVerses() != null){
-                        try{
-                            String[] splitEvent = isi2.getVerses().split(",");
-                            for(String ayatEvent : splitEvent){
-                                tampilEvent.add(ayatEvent +"\n"+wrapText(cekAyat(ayatEvent)) + "\n ");
-                                addPeoplePlacesMap(ayatEvent);
-                                count++;
-                            }
-                        }
-                        catch(Exception e){
-                            tampilEvent.add(isi2.getVerses()+"\n"+wrapText(isi2.getVerses()) + "\n ");
-                            addPeoplePlacesMap(isi2.getVerses());
+                        // tampilEvent.add(isi2.getTitle()+"\n"+isi2.getVerses());
+                        tampilEvent.add(isi2.getTitle()+"\n"+wrapText(isi2.getVerses(), 82, ","));
+                    }
+                    // else{
+                    //     tampilEvent.add(isi2.getTitle()+"\n" + "No data available");
+                    // }
+                    
+                    try{
+                        String[] splitEvent = isi2.getVerses().split(",");
+                        for(String ayatEvent : splitEvent){
+                            addPeoplePlacesMap(ayatEvent);
                             count++;
                         }
-                    }   
-
+                    }
+                    catch(Exception e){
+                        addPeoplePlacesMap(isi2.getVerses());
+                        count++;
+                    }
                 }
                 listViewEvent.setItems(tampilEvent);
+
+                listViewEvent.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                    @Override
+                    public void handle(MouseEvent event) {
+                        try {
+                            click = listViewEvent.getSelectionModel().getSelectedItem().toString();
+                            
+                            String[] split = click.split("\n");
+                            judul = split[0];
+                            ayat = split[1].split(",");
+                            // try{
+                            //     ayat = split[1].split(",");
+                            // }
+                            // catch(Exception e){
+                            //     ayat = null;
+                            // }
+                            
+
+                            root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
+                            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                            stage.setTitle("New Jerusalem");
+                            scene = new Scene(root);
+                            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        
+                    }
+                    
+                });
+
+
+                labelJumlah.setText(count + " hasil pencarian telah ditemukan untuk " + '"'+search.getText()+'"');
+    
+    
+                if(hasilPlace.isEmpty()){
+                    tp.getSelectionModel().select(tabEvent);
+                }
+                else if(hasilEvent.isEmpty()){
+                    tp.getSelectionModel().select(tabPlace);
+                }
+                else if(hasilEvent != null && hasilPlace != null){
+                    tp.getSelectionModel().select(tabPlace);
+                }
+    
+    
+                Map<String, Integer> sortedPeopleMap = sortByValue(peopleMap);
+                Map<String, Integer> sortedPlacesMap = sortByValue(placesMap);
+    
+                sortedPeopleMap.remove(null);
+                sortedPlacesMap.remove(null);
+                
+                // mulai hitung jumlah
+                List<Map.Entry<String, Integer> > listPeople = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
+                for (Map.Entry<String, Integer> peopleCount : listPeople) {
+                    peopleCountMap += peopleCount.getValue();
+                }
+    
+                List<Map.Entry<String, Integer> > listPlaces = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
+                for (Map.Entry<String, Integer> placesCount : listPlaces) {
+                    placesCountMap += placesCount.getValue();
+                }
+                // berhenti hitung jumlah
+    
+                // mulai buat bar visualisasi
+                List<Map.Entry<String, Integer> > listPeople2 = new LinkedList<Map.Entry<String, Integer> >(sortedPeopleMap.entrySet());
+    
+                for (Map.Entry<String, Integer> peopleCount : listPeople) {
+                    BarVisualisasi barPeople = createBarVisualisasi(peopleCount.getKey(), peopleCount.getValue(), peopleCountMap, "people");
+                    rectPeople.add(barPeople.getRect());
+                    labelRectPeople.add(barPeople.getLbl());
+                   
+                }
+    
+                List<Map.Entry<String, Integer> > listPlaces2 = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
+                for (Map.Entry<String, Integer> placesCount : listPlaces) {
+                    BarVisualisasi barPlaces = createBarVisualisasi(placesCount.getKey(), placesCount.getValue(), placesCountMap, "places");
+                    rectPlaces.add(barPlaces.getRect());
+                    labelRectPlaces.add(barPlaces.getLbl());
+                }
+                // berhenti buat bar visualisasi
+    
+                tampilJumlahPeople.getChildren().clear();
+                tampilJumlahPeople.getChildren().addAll(rectPeople);
+                tampilJumlahPeople.getChildren().addAll(labelRectPeople);
+    
+                tampilJumlahPlaces.getChildren().clear();
+                tampilJumlahPlaces.getChildren().addAll(rectPlaces);
+                tampilJumlahPlaces.getChildren().addAll(labelRectPlaces);
+            }
+        }
+    }
+
+    // method dipanggil saat melakukan search
+    private void tampilHasilSearch(ActionEvent event){
+        peopleCountMap = 0;
+        placesCountMap = 0;
+
+        buttonPlace.clear();
+        labelPlace.clear();
+        buttonEvent.clear();
+        labelEvent.clear();
+        peopleMap.clear();
+        placesMap.clear();
+        rectPeople.clear();
+        rectPlaces.clear();
+        labelRectPeople.clear();
+        labelRectPlaces.clear();
+
+        layoutY = 14;
+        YBarPeople = 5;
+        YBarPlaces = 5;
+        layoutXBar = 14;
+        layoutYBarPeople = 11;
+        layoutYBarPlaces = 11;
+        // database db = new database(); 
+
+        String olahPlace = search.getText().toLowerCase();
+        String olahEvent = search.getText().toLowerCase();
+
+        ControllerDetail.searchInitialize = search.getText().toLowerCase();
+
+        if(alertEmpty()){
+            
+            olahPlace = olahPlace.replace(" ", "-");
+            olahPlace = String.valueOf(olahPlace.charAt(0)).toUpperCase() + olahPlace.substring(1).toLowerCase();
+            ArrayList<VersesAndCount> hasilPlace = db.viewDataPlace(olahPlace);
+
+
+            olahEvent = String.valueOf(olahEvent.charAt(0)).toUpperCase() + olahEvent.substring(1).toLowerCase();
+            ArrayList<EventHandle> hasilEvent = db.viewDataEvents(olahEvent);
+
+            ObservableList<String> tampilPlace = FXCollections.observableArrayList();
+
+            
+            if(!hasilPlace.isEmpty() || !hasilEvent.isEmpty()){
+
+                int count = 0;
+                for(VersesAndCount isi : hasilPlace){
+                    try{
+                        String[] splitPlace = isi.getVerses().split(",");
+                        for (String ayatPlace :splitPlace){
+                            tampilPlace.add(ayatPlace+"\n"+wrapText(cekAyat(ayatPlace), 82, " ") + "\n ");
+                            addPeoplePlacesMap(ayatPlace);
+                            count++;
+                        }
+                    }
+                    catch(Exception e){
+                        tampilPlace.add(isi.getVerses()+"\n"+wrapText(cekAyat(isi.getVerses()), 82, " ") + "\n ");
+                        addPeoplePlacesMap(isi.getVerses());
+                        count++;
+                    }
+       
+                }
+                listViewPlace.setItems(tampilPlace);
+                
+
+    
+    
+                ObservableList<String> tampilEvent = FXCollections.observableArrayList();
+                for(EventHandle isi2 : hasilEvent){
+                    if(isi2.getVerses() != null){
+                        // tampilEvent.add(isi2.getTitle()+"\n"+isi2.getVerses());
+                        tampilEvent.add(isi2.getTitle()+"\n"+wrapText(isi2.getVerses(), 82, ","));
+                    }
+                    // else{
+                    //     tampilEvent.add(isi2.getTitle()+"\n" + "No data available");
+                    // }
+                    
+                    try{
+                        String[] splitEvent = isi2.getVerses().split(",");
+                        for(String ayatEvent : splitEvent){
+                            addPeoplePlacesMap(ayatEvent);
+                            count++;
+                        }
+                    }
+                    catch(Exception e){
+                        addPeoplePlacesMap(isi2.getVerses());
+                        count++;
+                    }
+                }
+                listViewEvent.setItems(tampilEvent);
+
+                listViewEvent.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                    @Override
+                    public void handle(MouseEvent event) {
+                        try {
+                            click = listViewEvent.getSelectionModel().getSelectedItem().toString();
+                            
+                            String[] split = click.split("\n");
+                            judul = split[0];
+                            ayat = split[1].split(",");
+                            // try{
+                            //     ayat = split[1].split(",");
+                            // }
+                            // catch(Exception e){
+                            //     ayat = null;
+                            // }
+                            
+
+                            root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
+                            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                            stage.setTitle("New Jerusalem");
+                            scene = new Scene(root);
+                            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        
+                    }
+                    
+                });
+
+
                 labelJumlah.setText(count + " hasil pencarian telah ditemukan untuk " + '"'+search.getText()+'"');
     
     
@@ -285,19 +537,21 @@ public class Controller{
         }
     }
 
-    private String wrapText(String text){
-        String[] split = text.split(" ");
+    public static    String wrapText(String text, int len, String delimiter){
+        String[] split = text.split(delimiter);
         int count = 0;
-        int check = 82;
+        // int check = 82;
+        int check = len;
         String output = "";
         for(String i: split){
             if(count+i.length() + 1 > check){
                 output += "\n";
-                output += i;
-                check += 82;
+                output += i + delimiter;
+                // check += 82;
+                check += len;
             }
             else{
-                output += i + " ";
+                output += i + delimiter;
             }
             count+=i.length();
         }
@@ -428,7 +682,7 @@ public class Controller{
         
     }
     
-    private String cekAyat(String ayat){
+    public static String cekAyat(String ayat){
         // database db = new database();
         String hasil = db.viewAyat(ayat);
         return hasil;

@@ -16,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import id.ac.ukdw.fti.rpl.theartificier.Controller;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -80,7 +81,7 @@ public class HomePageController implements Initializable
 
         for(BookChapterNum isiVerse : verse){
             // hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
-            hasilVerse.add(isiVerse.getOsisRef()+"\n"+wrapText(isiVerse.getVerse())+"\n"+" ");
+            hasilVerse.add(isiVerse.getOsisRef()+"\n"+Controller.wrapText(isiVerse.getVerse(), 117, " ")+"\n"+" ");
         }
         tampilAyat.setItems(hasilVerse);
 
@@ -97,24 +98,24 @@ public class HomePageController implements Initializable
 
     }
 
-    private String wrapText(String text){
-        String[] split = text.split(" ");
-        int count = 0;
-        int check = 117;
-        String output = "";
-        for(String i: split){
-            if(count+i.length() + 1 > check){
-                output += "\n";
-                output += i;
-                check += 117;
-            }
-            else{
-                output += i + " ";
-            }
-            count+=i.length();
-        }
-        return output;
-    }
+    // private String wrapText(String text){
+    //     String[] split = text.split(" ");
+    //     int count = 0;
+    //     int check = 117;
+    //     String output = "";
+    //     for(String i: split){
+    //         if(count+i.length() + 1 > check){
+    //             output += "\n";
+    //             output += i;
+    //             check += 117;
+    //         }
+    //         else{
+    //             output += i + " ";
+    //         }
+    //         count+=i.length();
+    //     }
+    //     return output;
+    // }
 
     public void switchToScene(ActionEvent event)throws IOException{
         root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -167,7 +168,7 @@ public class HomePageController implements Initializable
             
             for(BookChapterNum isi3 : isiAyat){
                 
-                hasil3.add(isi3.getOsisRef()+ "\n"+ wrapText(isi3.getVerse()) + "\n ");
+                hasil3.add(isi3.getOsisRef()+ "\n"+ Controller.wrapText(isi3.getVerse(), 117, " ") + "\n ");
             }
 
             tampilAyat.setItems(hasil3);
