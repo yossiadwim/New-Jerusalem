@@ -108,7 +108,8 @@ public class Controller implements Initializable{
 
     public static String click;
     public static String judul;
-    public static String[] ayat;
+    public static ArrayList<String> ayat = new ArrayList<>();
+    
 
     static Database db = new Database();
 
@@ -234,9 +235,9 @@ public class Controller implements Initializable{
                         // tampilEvent.add(isi2.getTitle()+"\n"+isi2.getVerses());
                         tampilEvent.add(isi2.getTitle()+"\n"+wrapText(isi2.getVerses(), 82, ","));
                     }
-                    // else{
-                    //     tampilEvent.add(isi2.getTitle()+"\n" + "No data available");
-                    // }
+                    else{
+                        tampilEvent.add(isi2.getTitle()+"\n" + "No data available");
+                    }
                     
                     try{
                         String[] splitEvent = isi2.getVerses().split(",");
@@ -256,27 +257,48 @@ public class Controller implements Initializable{
 
                     @Override
                     public void handle(MouseEvent event) {
-                        try {
-                            click = listViewEvent.getSelectionModel().getSelectedItem().toString();
                             
-                            String[] split = click.split("\n");
-                            judul = split[0];
-                            ayat = split[1].split(",");
-                            // try{
-                            //     ayat = split[1].split(",");
-                            // }
-                            // catch(Exception e){
-                            //     ayat = null;
-                            // }
-                            
+                        try{
 
-                            root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
-                            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                            stage.setTitle("New Jerusalem");
-                            scene = new Scene(root);
-                            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
-                            stage.setScene(scene);
-                            stage.show();
+                            if(listViewEvent.getSelectionModel().getSelectedItem() != null){
+                                click = listViewEvent.getSelectionModel().getSelectedItem().toString();
+                            
+                                // String[] split = click.replace("\n","").split(",");
+                                // judul = split[0];
+                                // for(int i=1;i< split.length;i++){
+                                //     ayat.add(split[i]);
+                                // }
+                                String split = click.replace("\n","");
+                                System.out.println(split);
+                                // String aaa = split[1];
+                                
+                                // for (String i : split) {
+                                //     System.out.println(i);
+                                // }
+
+
+                                // String[] split = click.split("\n");
+                                // judul = split[0];
+                                // String[] ayt = split[1].replace("\n", "").split(",");
+                                
+                                // for(int i=1; i<split[1].length(); i++){
+                                //     ayat.add(split[1][i]);
+                                // }
+                                // for(String i : ayt){
+                                //     System.out.println("Line 279 " + i);
+                                //     ayat.add(i);
+                                // }
+                                    
+                                root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
+                                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                                stage.setTitle("New Jerusalem");
+                                scene = new Scene(root);
+                                stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+                                stage.setScene(scene);
+                                stage.show();
+                            }
+                            
+                        
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
@@ -420,9 +442,9 @@ public class Controller implements Initializable{
                         // tampilEvent.add(isi2.getTitle()+"\n"+isi2.getVerses());
                         tampilEvent.add(isi2.getTitle()+"\n"+wrapText(isi2.getVerses(), 82, ","));
                     }
-                    // else{
-                    //     tampilEvent.add(isi2.getTitle()+"\n" + "No data available");
-                    // }
+                    else{
+                        tampilEvent.add(isi2.getTitle()+"\n" + "No data available");
+                    }
                     
                     try{
                         String[] splitEvent = isi2.getVerses().split(",");
@@ -441,32 +463,51 @@ public class Controller implements Initializable{
                 listViewEvent.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                     @Override
-                    public void handle(MouseEvent event) {
-                        try {
-                            click = listViewEvent.getSelectionModel().getSelectedItem().toString();
-                            
-                            String[] split = click.split("\n");
-                            judul = split[0];
-                            ayat = split[1].split(",");
-                            // try{
-                            //     ayat = split[1].split(",");
-                            // }
-                            // catch(Exception e){
-                            //     ayat = null;
-                            // }
-                            
+                    public void handle(MouseEvent event){
 
-                            root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
-                            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                            stage.setTitle("New Jerusalem");
-                            scene = new Scene(root);
-                            stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
-                            stage.setScene(scene);
-                            stage.show();
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                        try{
+
+                            if(listViewEvent.getSelectionModel().getSelectedItem() != null){
+                                click = listViewEvent.getSelectionModel().getSelectedItem().toString();
+                                
+                                
+                                String split = click.replace("\n","");
+                                System.out.println(split);
+                                // String aaa = split[1];
+                                
+                                // for (String i : split) {
+                                //     System.out.println(i);
+                                // }
+                                // for(int i=1;i< split.length;i++){
+                                //     ayat.add(split[i]);
+                                // }
+
+                                // String[] split = click.split("\n");
+                                // judul = split[0];
+                                // String[] ayt = split[1].replace("\n", "").split(",");
+                                
+                                // for(int i=1; i<split[1].length(); i++){
+                                //     ayat.add(split[1][i]);
+                                // }
+                                // for(String i : ayt){
+                                //     System.out.println("Line 477 " + i);
+                                //     ayat.add(i);
+                                // }
+
+                                    
+                                root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
+                                stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                                stage.setTitle("New Jerusalem");
+                                scene = new Scene(root);
+                                stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+                                stage.setScene(scene);
+                                stage.show();
+                            }
                         }
+                        catch(IOException e){
+                            e.getMessage();
+                        }
+
                         
                     }
                     
@@ -537,7 +578,7 @@ public class Controller implements Initializable{
         }
     }
 
-    public static    String wrapText(String text, int len, String delimiter){
+    public static String wrapText(String text, int len, String delimiter){
         String[] split = text.split(delimiter);
         int count = 0;
         // int check = 82;

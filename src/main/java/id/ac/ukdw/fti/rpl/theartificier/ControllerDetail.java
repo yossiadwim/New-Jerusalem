@@ -47,13 +47,43 @@ public class ControllerDetail implements Initializable {
         Controller.searchInitialize = searchInitialize;
 
         String jdl = Controller.judul;
-        // if(!Controller.ayat.equals(null)){
+        
+        try{
+
+            if(Controller.ayat.equals("No data available")){
+                
+                ObservableList<String> hasilAyat = FXCollections.observableArrayList();
+                hasilAyat.add("No data Available");
+                judulDetail.setText(jdl);
+                listViewDetail.setItems(hasilAyat);
+
+            }
+            else{
+                
+                ArrayList<String> ayatNum = Controller.ayat;
+                ObservableList<String> hasilAyat = FXCollections.observableArrayList();
+                for(String ayat : ayatNum){
+                    
+                    hasilAyat.add(ayat + "\n" + Controller.wrapText(Controller.cekAyat(ayat), 80, " ") + "\n ");
+                }
+
+                judulDetail.setText(jdl);
+                listViewDetail.setItems(hasilAyat);
+                ayatNum.clear();
+            }
+
+        }
+        catch(Exception e){
+            e.getMessage();
+        }
+
+        // if(Controller.ayat != null){
         //     String[] ayatNum = Controller.ayat;
         //     System.out.println("IF");
 
         //     ObservableList<String> hasilAyat = FXCollections.observableArrayList();
         //     for(String ayat : ayatNum){
-        //         hasilAyat.add(ayat + "\n" + Controller.wrapText(Controller.cekAyat(ayat), 80) + "\n ");
+        //         hasilAyat.add(ayat + "\n" + Controller.wrapText(Controller.cekAyat(ayat), 80, " ") + "\n ");
         //     }
         //     judulDetail.setText(jdl);
         //     listViewDetail.setItems(hasilAyat);
@@ -67,13 +97,13 @@ public class ControllerDetail implements Initializable {
         //     listViewDetail.setItems(hasilAyat);
         // }
 
-        String[] ayatNum = Controller.ayat;
-        ObservableList<String> hasilAyat = FXCollections.observableArrayList();
-        for(String ayat : ayatNum){
-            hasilAyat.add(ayat + "\n" + Controller.wrapText(Controller.cekAyat(ayat), 80, " ") + "\n ");
-        }
-        judulDetail.setText(jdl);
-        listViewDetail.setItems(hasilAyat);
+        // String[] ayatNum = Controller.ayat;
+        // ObservableList<String> hasilAyat = FXCollections.observableArrayList();
+        // for(String ayat : ayatNum){
+        //     hasilAyat.add(ayat + "\n" + Controller.wrapText(Controller.cekAyat(ayat), 80, " ") + "\n ");
+        // }
+        // judulDetail.setText(jdl);
+        // listViewDetail.setItems(hasilAyat);
         
         
     }
