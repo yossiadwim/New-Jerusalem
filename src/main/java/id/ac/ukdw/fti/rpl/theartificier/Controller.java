@@ -268,8 +268,13 @@ public class Controller implements Initializable{
                                 // for(int i=1;i< split.length;i++){
                                 //     ayat.add(split[i]);
                                 // }
-                                String split = click.replace("\n","");
-                                System.out.println(split);
+                                click = click.substring(0,click.indexOf("\n")) +"," + click.substring(click.indexOf("\n")+1, click.length()).replace("\n", "");
+                                String[] split = click.split(",");
+                                judul = split[0];
+
+                                for(int i = 1 ; i<split.length ;i++){
+                                    ayat.add(split[i]);
+                                }
                                 // String aaa = split[1];
                                 
                                 // for (String i : split) {
@@ -469,30 +474,13 @@ public class Controller implements Initializable{
 
                             if(listViewEvent.getSelectionModel().getSelectedItem() != null){
                                 click = listViewEvent.getSelectionModel().getSelectedItem().toString();
-                                
-                                
-                                String split = click.replace("\n","");
-                                System.out.println(split);
-                                // String aaa = split[1];
-                                
-                                // for (String i : split) {
-                                //     System.out.println(i);
-                                // }
-                                // for(int i=1;i< split.length;i++){
-                                //     ayat.add(split[i]);
-                                // }
+                                click = click.substring(0,click.indexOf("\n")) +"," + click.substring(click.indexOf("\n")+1, click.length()).replace("\n", "");
+                                String[] split = click.split(",");
+                                judul = split[0];
 
-                                // String[] split = click.split("\n");
-                                // judul = split[0];
-                                // String[] ayt = split[1].replace("\n", "").split(",");
-                                
-                                // for(int i=1; i<split[1].length(); i++){
-                                //     ayat.add(split[1][i]);
-                                // }
-                                // for(String i : ayt){
-                                //     System.out.println("Line 477 " + i);
-                                //     ayat.add(i);
-                                // }
+                                for(int i = 1 ; i<split.length ;i++){
+                                    ayat.add(split[i]);
+                                }
 
                                     
                                 root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
@@ -596,6 +584,7 @@ public class Controller implements Initializable{
             }
             count+=i.length();
         }
+        output = output.substring(0,output.length()-1);
         return output;
     }
 

@@ -50,28 +50,22 @@ public class ControllerDetail implements Initializable {
         
         try{
 
-            if(Controller.ayat.equals("No data available")){
+            ArrayList<String> ayatNum = Controller.ayat;
+            ObservableList<String> hasilAyat = FXCollections.observableArrayList();
+            for(String ayat : ayatNum){
                 
-                ObservableList<String> hasilAyat = FXCollections.observableArrayList();
-                hasilAyat.add("No data Available");
-                judulDetail.setText(jdl);
-                listViewDetail.setItems(hasilAyat);
-
-            }
-            else{
-                
-                ArrayList<String> ayatNum = Controller.ayat;
-                ObservableList<String> hasilAyat = FXCollections.observableArrayList();
-                for(String ayat : ayatNum){
-                    
+                if(ayat.equals("No data available")){
+                    hasilAyat.add("No data available");
+                }
+                else{
                     hasilAyat.add(ayat + "\n" + Controller.wrapText(Controller.cekAyat(ayat), 80, " ") + "\n ");
                 }
-
-                judulDetail.setText(jdl);
-                listViewDetail.setItems(hasilAyat);
-                ayatNum.clear();
+                
             }
-
+            
+            judulDetail.setText(jdl);
+            listViewDetail.setItems(hasilAyat);
+            ayatNum.clear();
         }
         catch(Exception e){
             e.getMessage();
