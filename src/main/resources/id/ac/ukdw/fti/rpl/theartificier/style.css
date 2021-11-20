@@ -10,8 +10,8 @@
 }
 
 #searchbutton{
-    -fx-background-color:transparent;;
     -fx-text-fill: #fefbe9;
+    -fx-background-color: transparent;
 }
 .button:pressed{
     -fx-background-color: #5fa7ad;
@@ -34,4 +34,32 @@ ComboBox{
     -fx-font-weight: bold;
     -fx-text-fill: #ffffff;
 
+}
+
+#pindahHalaman{
+    -fx-background-color: #1f666d;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+#pindahHalaman:hover{
+    -fx-background-color: #5fa7ad;
+    -fx-text-fill: #000000;
+    -fx-font-weight: bold;
+}
+
+#back{
+    -fx-background-color: transparent;
+}
+
+#back{
+    -fx-background-color: transparent;
+}
+
+#homepage{
+    -fx-background-color: #1f666d;
+}
+
+#homepage:hover{   
+    -fx-background-color: #5fa7ad;
 }
