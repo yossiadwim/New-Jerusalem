@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Database",
+            "request": "launch",
+            "mainClass": "theartificier/id.ac.ukdw.fti.rpl.theartificier.database.Database",
+            "projectName": "tugas-akhir-rpl"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "theartificier/id.ac.ukdw.fti.rpl.theartificier.Main",

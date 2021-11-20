@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="692.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.VisualisasiPageController">
+   <children>
+      <AnchorPane fx:id="VisualisasiUtama" layoutY="68.0" prefHeight="658.0" prefWidth="938.0" />
+      <Button id="pindahHalaman" fx:id="pindahHalaman" layoutX="394.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchHalaman" prefHeight="29.0" prefWidth="150.0" stylesheets="@style.css" text="Places dan Events" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/search-icon-white.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="pindahHalaman" fx:id="btnHomePage" layoutX="227.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="16.0" prefWidth="150.0" stylesheets="@style.css" text="BIBLE" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/outline_menu_book_white_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text id="title" fill="#388087" layoutX="65.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Text>
+      <Text fill="#6fb3b8" layoutX="62.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Jerusalem Project">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

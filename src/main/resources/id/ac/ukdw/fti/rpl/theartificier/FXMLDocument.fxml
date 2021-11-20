@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -64,21 +63,35 @@
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="buttonKembali" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="18.0" prefWidth="164.0" stylesheets="@style.css" text="ke Home Page">
-               <HBox.margin>
-                  <Insets left="50.0" />
-               </HBox.margin>
+            <Button id="pindahHalaman" fx:id="buttonVisual" mnemonicParsing="false" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../img/outline_home_white_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="40.0" right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button id="pindahHalaman" fx:id="buttonKembali" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="29.0" prefWidth="150.0" stylesheets="@style.css" text="BIBLE" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../img/outline_menu_book_white_24dp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children></HBox>
-      <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="33.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <styleClass>
-            <String fx:value="transparent" />
-            <String fx:value="button_hover" />
-            <String fx:value="button" />
-         </styleClass>
+      <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="33.0" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

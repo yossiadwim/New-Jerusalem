@@ -72,29 +72,63 @@ public class HomePageController implements Initializable
 
     Database db = new Database();
 
+    public static String kitabAwal = "";
+    public static String pasalAwal = "";
+    public static int ayatAwal;
+    public static boolean isFromVisual = false;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        ArrayList<BookChapterNum> verse = db.versesFromStart();
-        ObservableList<String> hasilVerse = FXCollections.observableArrayList();
+        // ArrayList<BookChapterNum> verse = db.versesFromStart();
+        // ObservableList<String> hasilVerse = FXCollections.observableArrayList();
 
-        for(BookChapterNum isiVerse : verse){
-            // hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
-            hasilVerse.add(isiVerse.getOsisRef()+"\n"+Controller.wrapText(isiVerse.getVerse(), 117, " ")+"\n"+" ");
-        }
-        tampilAyat.setItems(hasilVerse);
+        // for(BookChapterNum isiVerse : verse){
+        //     // hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
+        //     hasilVerse.add(isiVerse.getOsisRef()+"\n"+Controller.wrapText(isiVerse.getVerse(), 117, " ")+"\n"+" ");
+        // }
+        // tampilAyat.setItems(hasilVerse);
 
 
         //kitab
-        ArrayList<BookChapterNum> data = db.ambilKitab();
-        ObservableList<String> hasil = FXCollections.observableArrayList();
-
-        for(BookChapterNum isi : data){
-            hasil.add(isi.getBook());
-            
+        if(isFromVisual){
+            ArrayList<BookChapterNum> data = db.ambilKitab();
+            ObservableList<String> hasil = FXCollections.observableArrayList();
+    
+            for(BookChapterNum isi : data){
+                hasil.add(isi.getBook());
+                
+            }
+            kitab.setItems(hasil); 
+            kitab.getSelectionModel().select(hasil.indexOf(kitabAwal));
+            getKitabFromVisualisasi();
         }
-        kitab.setItems(hasil); 
+        else{
+            ArrayList<BookChapterNum> verse = db.versesFromStart();
+            ObservableList<String> hasilVerse = FXCollections.observableArrayList();
+    
+            for(BookChapterNum isiVerse : verse){
+                // hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
+                hasilVerse.add(isiVerse.getOsisRef()+"\n"+Controller.wrapText(isiVerse.getVerse(), 117, " ")+"\n"+" ");
+            }
+            tampilAyat.setItems(hasilVerse);
+
+            ArrayList<BookChapterNum> data = db.ambilKitab();
+            ObservableList<String> hasil = FXCollections.observableArrayList();
+    
+            for(BookChapterNum isi : data){
+                hasil.add(isi.getBook());
+                
+            }
+            kitab.setItems(hasil); 
+        }
+
+        
+
+        // System.out.println("start");
+        // ArrayList<BookChapterNum> b = db.getAllBooks();
+        // System.out.println("finish");
 
     }
 
@@ -128,8 +162,45 @@ public class HomePageController implements Initializable
         stage.show();
     }
 
+    public void getKitabFromVisualisasi(){
+
+        //ambil kitab
+        String book = kitab.getSelectionModel().getSelectedItem();
+        ArrayList<BookChapterNum> dataPasal = db.ambilPasal(book);
+        ObservableList<String> hasil = FXCollections.observableArrayList();
+
+        for(BookChapterNum isi : dataPasal){
+            hasil.add(isi.getChapter());
+        }
+        pasal.setItems(hasil);
+        pasal.getSelectionModel().selectFirst();
 
 
+        // ambil pasal
+        String chapter = pasal.getSelectionModel().getSelectedItem();
+        pasalAwal = chapter;
+        ArrayList<BookChapterNum> dataAyat = db.ambilAyat(chapter);
+        ObservableList<Integer> hasil2 = FXCollections.observableArrayList();
+
+        for(BookChapterNum isi2 : dataAyat){
+            hasil2.add(isi2.getNum());
+        }
+        ayat.setItems(hasil2);
+        ayat.getSelectionModel().selectFirst();
+        ayatAwal = ayat.getSelectionModel().getSelectedItem();
+
+        ArrayList<BookChapterNum> isiAyat = db.ayatHomePage(kitabAwal, pasalAwal, ayatAwal);
+        ObservableList<String> hasil3 = FXCollections.observableArrayList();
+        
+        
+        for(BookChapterNum isi3 : isiAyat){
+            
+            hasil3.add(isi3.getOsisRef()+ "\n"+ Controller.wrapText(isi3.getVerse(), 117, " ") + "\n ");
+        }
+
+        tampilAyat.setItems(hasil3);
+        
+    }
 
     public void onClickSelectedKitab(ActionEvent event) {
         String kt = kitab.getSelectionModel().getSelectedItem();
@@ -141,6 +212,7 @@ public class HomePageController implements Initializable
             hasil.add(isi.getChapter());
         }
         pasal.setItems(hasil);
+        
     
     }
     
@@ -172,13 +244,11 @@ public class HomePageController implements Initializable
             }
 
             tampilAyat.setItems(hasil3);
+
         }
         catch(Exception e){
             e.getMessage();
         }
-
     }
-    
-    
 
 }

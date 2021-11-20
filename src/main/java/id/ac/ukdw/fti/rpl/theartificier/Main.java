@@ -19,12 +19,13 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
        
 
-        Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
         stage.setTitle("New Jerusalem");
         Scene scene = new Scene(root);
         scene.getStylesheets().add("resources/id/ac/ukdw/fti/rpl/theartificier/style.css");
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
-        stage.setResizable(false);
+        // stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

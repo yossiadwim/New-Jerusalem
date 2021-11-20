@@ -1,6 +1,8 @@
 package id.ac.ukdw.fti.rpl.theartificier.database;
 
 import id.ac.ukdw.fti.rpl.theartificier.modal.BookChapterNum;
+import id.ac.ukdw.fti.rpl.theartificier.modal.BookDiv;
+import id.ac.ukdw.fti.rpl.theartificier.modal.Chapter;
 import id.ac.ukdw.fti.rpl.theartificier.modal.EventHandle;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 import javafx.collections.FXCollections;
@@ -248,6 +250,100 @@ public class Database {
             e.getMessage();
         }
         return verse;
+    }
+
+    public ArrayList getAllBooks(){
+        String query = "select osisName, bookName, bookDiv, shortName, chapters, chapterCount, verseCount from books";
+        ArrayList<BookChapterNum> books = new ArrayList<BookChapterNum>();
+        ArrayList<BookChapterNum> temp = new ArrayList<BookChapterNum>();
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            while(rs.next()){
+                // String[] chapterList = rs.getString("chapters").split(",");
+                // ArrayList<Chapter> chapters = new ArrayList<Chapter>();
+                // for(String ch: chapterList){
+                //     chapters.add(new Chapter(ch, getVerseCountChapter(ch)));
+                // }
+                books.add(new BookChapterNum(rs.getString("bookName"), setBookDiv(rs.getString("bookDiv")), rs.getString("shortName"), rs.getInt("chapterCount"), rs.getInt("verseCount"), getCountBookDiv(rs.getString("bookDiv")), rs.getString("osisName")));
+            }
+            return books;
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return books;
+    }
+
+    private int getCountBookDiv(String bookDiv){
+        String query = "select count(bookDiv), testament from books where bookDiv = '" + bookDiv + "'";
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            return rs.getInt("count(bookDiv)");
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return 0;
+    }
+    public BookDiv setBookDiv(String bookDiv){
+        String query = "select DISTINCT(bookDiv), testament from books where bookDiv = '" + bookDiv + "'";
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            return new BookDiv(rs.getString("bookDiv"), getVerseTotalBook(rs.getString("bookDiv")), rs.getString("testament"));
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return null;
+    }
+
+    public ArrayList getBookDiv(){
+        String query = "select DISTINCT(bookDiv), testament from books";
+        ArrayList<BookDiv> bookDiv = new ArrayList<BookDiv>();
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            
+            while(rs.next()){
+                bookDiv.add(new BookDiv(rs.getString("bookDiv"), getVerseTotalBook(rs.getString("bookDiv")), rs.getString("testament")));
+            }
+            return bookDiv;
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return bookDiv;
+    }
+
+    private int getVerseTotalBook(String book){
+        String query = "select sum(verseCount) from books where bookDiv = '" + book + "'";
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            
+            return rs.getInt("sum(verseCount)");
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return 0;
+    }
+
+    private int getVerseCountChapter(String chapter){
+        String query = "select count(verseNum) from verses where chapter = '" + chapter + "'";
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            
+            return rs.getInt("count(verseNum)");
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return 0;
     }
 
 }
