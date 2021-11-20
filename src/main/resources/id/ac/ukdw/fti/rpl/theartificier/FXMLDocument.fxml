@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
@@ -153,4 +154,5 @@
       </AnchorPane>
       <TextField fx:id="search" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
+
 </GridPane>

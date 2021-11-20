@@ -1,3 +1,4 @@
+
 package id.ac.ukdw.fti.rpl.theartificier;
 
 import java.io.IOException;
@@ -240,3 +241,4 @@ public class VisualisasiPageController implements Initializable{
     }
     
 }
+
