@@ -16,7 +16,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <Button fx:id="pindahHalaman" layoutX="93.0" layoutY="74.0" mnemonicParsing="false" onAction="#switchToScene" prefHeight="29.0" prefWidth="150.0" stylesheets="@style.css" text="Places dan Events" textAlignment="CENTER">
+      <Button fx:id="pindahHalaman" layoutX="93.0" layoutY="74.0" mnemonicParsing="false" onAction="#switchToPencarian" prefHeight="29.0" prefWidth="150.0" stylesheets="@style.css" text="Places dan Events" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -46,7 +46,7 @@
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
       <ListView fx:id="tampilAyat" layoutX="50.0" layoutY="123.0" maxWidth="873.0" minWidth="100.0" prefHeight="542.0" prefWidth="831.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="123.0" />
-      <Button id="pindahHalaman" fx:id="buttonVisual" layoutX="43.0" layoutY="74.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
+      <Button id="pindahHalaman" fx:id="buttonKembali" layoutX="43.0" layoutY="74.0" mnemonicParsing="false" onAction="#switchToScene" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

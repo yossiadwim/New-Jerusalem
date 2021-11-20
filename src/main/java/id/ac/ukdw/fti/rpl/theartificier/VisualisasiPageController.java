@@ -35,6 +35,12 @@ public class VisualisasiPageController implements Initializable{
     @FXML
     private AnchorPane VisualisasiUtama;
 
+    @FXML
+    private Button pindahHalaman;
+
+    @FXML
+    private Button btnHomePage;
+
     private final int maxWidth = 1000;
     private final int maxHeight = 25;
     private final int layoutX = 66;
@@ -79,6 +85,7 @@ public class VisualisasiPageController implements Initializable{
 
                 layoutY += 27;
 
+
                 // create button
                 Button btn = new Button(book.getBook());
                 double btnWidth = (double)maxWidth/(double) book.getCountBookDiv();
@@ -105,77 +112,10 @@ public class VisualisasiPageController implements Initializable{
                 });
                 btn.setTooltip(new Tooltip(book.getBook() + "\n" + book.getChapterCount() + " chapters\n" + book.getVerseCount() + " verses\nklik untuk melihat detail"));
                 layoutXChapter += btnWidth + 2;
-                // selesai button
-
-                // // create rect
-                // Rectangle rect = new Rectangle();
-                // rect.setHeight(maxHeight);
-                // double rectWidth =(double) (1-((double) maxWidth/(double)book.getBookDiv().getVerseTotal())) * (double)maxWidth;
-                // rect.setWidth(rectWidth);
-                // rect.setFill(Color.GREY);
-                // rect.setLayoutX(layoutX);
-                // rect.setLayoutY(layoutY);
-                // rectList.add(rect);
-                // // selesai rect
-
-                // // create label
-                // Label lbl = new Label(book.getBookDiv().getBookDiv());
-                // lbl.setPrefHeight(maxHeight);
-                // lbl.setPrefWidth(rectWidth);
-                // lbl.setLayoutX(layoutX);
-                // lbl.setLayoutY(layoutY);
-                // lbl.setAlignment(Pos.CENTER);
-                // lbl.setTooltip(new Tooltip(book.getBookDiv().getBookDiv() + "\n" + book.getBookDiv().getVerseTotal() + " verses"));
-                // lblList.add(lbl);
-                // // selesai label
-
-                // layoutY += 27;
-
-                // // create button
-                // Button btn = new Button();
-                // double btnWidth = (double)book.getVerseCount()/(double)book.getBookDiv().getVerseTotal() * (double)rectWidth;
-                // double tambah;
-                // if(btnWidth <= 29){
-                //     btn.setPrefWidth(0);
-                //     tambah = 16;
-                // }
-                // else{
-                //     btn.setPrefWidth(btnWidth);
-                //     btn.setText(book.getBook());
-                //     tambah = btnWidth;
-                // }
-                // btn.setPrefHeight(maxHeight);
-                // btn.setLayoutX(layoutXChapter);
-                // btn.setLayoutY(layoutY);
-                // btn.setTooltip(new Tooltip(book.getBook() + "\n" + book.getChapterCount() + " chapters\n" + book.getVerseCount() + " verses"));
-                // layoutXChapter += tambah + 2;
-                // // selesai button
-
                 bookDiv = book.getBookDiv().getBookDiv();
                 btnList.add(btn);
             }
             else{
-                // // create button
-                // Button btn = new Button();
-                // double rectWidth = (double)(1-((double)maxWidth/(double)book.getBookDiv().getVerseTotal())) * (double)maxWidth;
-                // double btnWidth = (double)book.getVerseCount()/(double)book.getBookDiv().getVerseTotal() * (double)rectWidth;
-                // double tambah;
-                // btn.setPrefHeight(maxHeight);
-                // if(btnWidth <= 29){
-                //     btn.setPrefWidth(0);
-                //     tambah = 16;
-                // }
-                // else{
-                //     btn.setPrefWidth(btnWidth);
-                //     btn.setText(book.getBook());
-                //     tambah = btnWidth;
-                // }
-                // btn.setLayoutX(layoutXChapter);
-                // btn.setLayoutY(layoutY);
-                // btn.setTooltip(new Tooltip(book.getBook() + "\n" + book.getChapterCount() + " chapters\n" + book.getVerseCount() + " verses"));
-
-                // layoutXChapter += tambah + 2;
-                // // selesai button
 
                 // create button
                 Button btn = new Button(book.getBook());
@@ -207,11 +147,17 @@ public class VisualisasiPageController implements Initializable{
                 btnList.add(btn);
                 bookDiv = book.getBookDiv().getBookDiv();
             }
-            
-            
-            
+
         }
+
+        Label lbl = new Label("perjanjian lama");
+        lbl.setPrefHeight(36);
+        lbl.setPrefWidth(300);
+        lbl.setLayoutX(-111);
+        lbl.setLayoutY(156);
+        lbl.setRotate(270);
         VisualisasiUtama.getChildren().clear();
+        VisualisasiUtama.getChildren().add(lbl);
         VisualisasiUtama.getChildren().addAll(rectList);
         VisualisasiUtama.getChildren().addAll(lblList);
         VisualisasiUtama.getChildren().addAll(btnList);

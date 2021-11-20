@@ -151,8 +151,8 @@ public class HomePageController implements Initializable
     //     return output;
     // }
 
-    public void switchToScene(ActionEvent event)throws IOException{
-        root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+    public void switchToScene(ActionEvent event)throws Exception{
+        root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("New Jerusalem");
         scene = new Scene(root);
@@ -249,6 +249,18 @@ public class HomePageController implements Initializable
         catch(Exception e){
             e.getMessage();
         }
+    }
+
+    @FXML
+    void switchToPencarian(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
