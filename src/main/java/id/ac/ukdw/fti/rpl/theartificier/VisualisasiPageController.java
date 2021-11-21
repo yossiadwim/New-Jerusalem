@@ -48,8 +48,10 @@ public class VisualisasiPageController implements Initializable{
     private int layoutY = 0;
     private int layoutXChapter = 66;
 
-    private final String BUTTON_STYLE = "-fx-background-color: #1f666d;-fx-text-fill: #ffffff;-fx-font-weight: bold;";
-    private final String BUTTON_HOVER = "-fx-background-color: #5fa7ad; -fx-text-fill: #000000;-fx-font-weight: bold;";
+    private final String BUTTON_STYLE = "-fx-background-color: #6B7B8E;-fx-text-fill: #ffffff;-fx-font-weight: bold;";
+    private final String BUTTON_HOVER = "-fx-background-color: #8FBBAF; -fx-text-fill: #000000;-fx-font-weight: bold;";
+    private final String RECT_STYLE = "#ACDEAA";
+    private final String TESTAMENT_STYLE = "#D6F8B8";
     Database db = new Database();
 
     @Override
@@ -70,7 +72,8 @@ public class VisualisasiPageController implements Initializable{
                 Rectangle rect = new Rectangle();
                 rect.setHeight(maxHeight);
                 rect.setWidth(maxWidth);
-                rect.setFill(Color.GREY);
+                // rect.setFill(Color.GREY);
+                rect.setFill(Color.valueOf(RECT_STYLE));
                 rect.setLayoutX(layoutX);
                 rect.setLayoutY(layoutY);
                 rectList.add(rect);
@@ -170,7 +173,8 @@ public class VisualisasiPageController implements Initializable{
 
         // rect dan label old testament
         Rectangle rectOldTestament = new Rectangle();
-        rectOldTestament.setFill(Color.LIGHTGRAY);
+        // rectOldTestament.setFill(Color.LIGHTGRAY);
+        rectOldTestament.setFill(Color.valueOf(TESTAMENT_STYLE));
         rectOldTestament.setHeight(36);
         rectOldTestament.setWidth(300);
         rectOldTestament.setLayoutX(-111);
@@ -188,7 +192,8 @@ public class VisualisasiPageController implements Initializable{
 
         // rect dan label old testament
         Rectangle rectNewTestament = new Rectangle();
-        rectNewTestament.setFill(Color.LIGHTGRAY);
+        // rectNewTestament.setFill(Color.LIGHTGRAY);
+        rectNewTestament.setFill(Color.valueOf(TESTAMENT_STYLE));
         rectNewTestament.setHeight(36);
         rectNewTestament.setWidth(300);
         rectNewTestament.setLayoutX(-111);

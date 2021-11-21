@@ -101,6 +101,9 @@ public class Controller implements Initializable{
     @FXML
     private ListView listViewEvent;
 
+    @FXML
+    private Button buttonVisual;
+
         
     private Stage stage;
     private Scene scene;
@@ -721,6 +724,16 @@ public class Controller implements Initializable{
     
     public void switchToHomePage(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToVisualisasiPage(ActionEvent event) throws IOException{
+        root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("New Jerusalem");
         scene = new Scene(root);

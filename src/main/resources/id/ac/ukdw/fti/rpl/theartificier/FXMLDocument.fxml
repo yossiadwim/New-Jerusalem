@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?fxml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -64,7 +64,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button id="pindahHalaman" fx:id="buttonVisual" mnemonicParsing="false" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
+            <Button id="pindahHalaman" fx:id="buttonVisual" mnemonicParsing="false" onAction="#switchToVisualisasiPage" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
