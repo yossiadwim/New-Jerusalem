@@ -244,4 +244,3 @@ public class VisualisasiPageController implements Initializable{
     }
     
 }
-
