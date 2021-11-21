@@ -14,4 +14,4 @@ SS Aplikasi:
 
 ![image](https://user-images.githubusercontent.com/89827933/142760556-8d672268-23c0-4cfb-a291-51a5afa60c73.png)
 
-![image](https://user-images.githubusercontent.com/89827933/142760571-e71b2d4b-c266-43ae-9704-0ebfdd615d0b.png)
+![image](https://user-images.githubusercontent.com/89827933/142763883-90eee6a8-dce3-497e-86cb-1b45854a21da.png)
