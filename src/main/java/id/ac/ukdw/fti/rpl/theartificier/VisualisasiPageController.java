@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,6 +47,9 @@ public class VisualisasiPageController implements Initializable{
     private final int layoutX = 66;
     private int layoutY = 0;
     private int layoutXChapter = 66;
+
+    private final String BUTTON_STYLE = "-fx-background-color: #1f666d;-fx-text-fill: #ffffff;-fx-font-weight: bold;";
+    private final String BUTTON_HOVER = "-fx-background-color: #5fa7ad; -fx-text-fill: #000000;-fx-font-weight: bold;";
     Database db = new Database();
 
     @Override
@@ -93,7 +97,10 @@ public class VisualisasiPageController implements Initializable{
                 btn.setPrefHeight(maxHeight);
                 btn.setLayoutX(layoutXChapter);
                 btn.setLayoutY(layoutY);
-                btn.setStyle("-fx-cursor: hand;");
+                btn.setStyle(BUTTON_STYLE);
+                btn.setCursor(Cursor.HAND);
+                btn.setOnMouseEntered(e -> btn.setStyle(BUTTON_HOVER));
+                btn.setOnMouseExited(e -> btn.setStyle(BUTTON_STYLE));
                 btn.setOnAction(new EventHandler<ActionEvent>() {
 
                     @Override
@@ -124,7 +131,10 @@ public class VisualisasiPageController implements Initializable{
                 btn.setPrefHeight(maxHeight);
                 btn.setLayoutX(layoutXChapter);
                 btn.setLayoutY(layoutY);
-                btn.setStyle("-fx-cursor: hand;");
+                btn.setStyle(BUTTON_STYLE);
+                btn.setCursor(Cursor.HAND);
+                btn.setOnMouseEntered(e -> btn.setStyle(BUTTON_HOVER));
+                btn.setOnMouseExited(e -> btn.setStyle(BUTTON_STYLE));
                 btn.setOnAction(new EventHandler<ActionEvent>() {
 
                     @Override
@@ -150,14 +160,56 @@ public class VisualisasiPageController implements Initializable{
 
         }
 
-        Label lbl = new Label("perjanjian lama");
-        lbl.setPrefHeight(36);
-        lbl.setPrefWidth(300);
-        lbl.setLayoutX(-111);
-        lbl.setLayoutY(156);
-        lbl.setRotate(270);
+        // Label lbl = new Label("perjanjian lama");
+        // lbl.setPrefHeight(36);
+        // lbl.setPrefWidth(300);
+        // lbl.setLayoutX(-111);
+        // lbl.setLayoutY(156);
+        // lbl.setRotate(270);
+
+
+        // rect dan label old testament
+        Rectangle rectOldTestament = new Rectangle();
+        rectOldTestament.setFill(Color.LIGHTGRAY);
+        rectOldTestament.setHeight(36);
+        rectOldTestament.setWidth(300);
+        rectOldTestament.setLayoutX(-111);
+        rectOldTestament.setLayoutY(167);
+        rectOldTestament.setRotate(270);
+
+        Label lblOldTestament = new Label("Old Testament");
+        lblOldTestament.setAlignment(Pos.CENTER);
+        lblOldTestament.setPrefHeight(36);
+        lblOldTestament.setPrefWidth(300);
+        lblOldTestament.setLayoutX(-111);
+        lblOldTestament.setLayoutY(167);
+        lblOldTestament.setRotate(270);
+        // selesai
+
+        // rect dan label old testament
+        Rectangle rectNewTestament = new Rectangle();
+        rectNewTestament.setFill(Color.LIGHTGRAY);
+        rectNewTestament.setHeight(36);
+        rectNewTestament.setWidth(300);
+        rectNewTestament.setLayoutX(-111);
+        rectNewTestament.setLayoutY(477);
+        rectNewTestament.setRotate(270);
+
+        Label lblNewTestament = new Label("New Testament");
+        lblNewTestament.setAlignment(Pos.CENTER);
+        lblNewTestament.setPrefHeight(36);
+        lblNewTestament.setPrefWidth(300);
+        lblNewTestament.setLayoutX(-111);
+        lblNewTestament.setLayoutY(477);
+        lblNewTestament.setRotate(270);
+        // selesai
+
+        rectList.add(rectOldTestament);
+        rectList.add(rectNewTestament);
+        lblList.add(lblOldTestament);
+        lblList.add(lblNewTestament);
+        
         VisualisasiUtama.getChildren().clear();
-        VisualisasiUtama.getChildren().add(lbl);
         VisualisasiUtama.getChildren().addAll(rectList);
         VisualisasiUtama.getChildren().addAll(lblList);
         VisualisasiUtama.getChildren().addAll(btnList);
