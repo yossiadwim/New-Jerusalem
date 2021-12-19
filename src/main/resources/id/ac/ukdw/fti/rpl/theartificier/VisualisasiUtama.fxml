@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?fxml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane focusTraversable="true" prefHeight="692.0" prefWidth="938.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.VisualisasiUtamaController">
+   <children>
+      <Text fill="#388087" layoutX="65.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Text>
+      <Text fill="#6fb3b8" layoutX="62.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Jerusalem Project">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Text>
+      <Button id="pindahHalaman" fx:id="pindahHalaman" layoutX="404.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchHalaman" prefHeight="29.0" prefWidth="150.0" stylesheets="@Dokumen/Kehidupan%20Kampus/Semester%205/RekayasaPerangkatLunak/New-Jerusalem/src/main/resources/id/ac/ukdw/fti/rpl/theartificier/style.css" text="Places dan Events" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/search-icon-white.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button id="pindahHalaman" fx:id="btnHomePage" layoutX="237.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="16.0" prefWidth="150.0" stylesheets="@Dokumen/Kehidupan%20Kampus/Semester%205/RekayasaPerangkatLunak/New-Jerusalem/src/main/resources/id/ac/ukdw/fti/rpl/theartificier/style.css" text="BIBLE" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/outline_menu_book_white_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <AnchorPane fx:id="AnchorMaps" layoutX="19.0" layoutY="137.0" prefHeight="465.0" prefWidth="900.0">
+         <children>
+            <ImageView fitHeight="465.0" fitWidth="900.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/maps%20final.PNG" />
+               </image>
+            </ImageView>
+            <Button alignment="CENTER" layoutX="890.0" layoutY="455.0" mnemonicParsing="false" style="-fx-background-radius: 5em; -fx-min-width: 10px; -fx-min-height: 10px; -fx-max-width: 10px; -fx-max-height: 10px; -fx-background-color: blue;" text="Button" />
+         </children>
+      </AnchorPane>
+   </children>
+
+</AnchorPane>

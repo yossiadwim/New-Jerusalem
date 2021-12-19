@@ -3,10 +3,12 @@ package id.ac.ukdw.fti.rpl.theartificier.database;
 import id.ac.ukdw.fti.rpl.theartificier.modal.BookChapterNum;
 import id.ac.ukdw.fti.rpl.theartificier.modal.BookDiv;
 import id.ac.ukdw.fti.rpl.theartificier.modal.Chapter;
+import id.ac.ukdw.fti.rpl.theartificier.modal.DataMaps;
 import id.ac.ukdw.fti.rpl.theartificier.modal.EventHandle;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.ComboBox;
 
 import java.sql.Connection;
@@ -346,4 +348,39 @@ public class Database {
         return 0;
     }
 
+    public ArrayList dataMaps(){
+        String query = "select title, duration, verses, locations from events where locations is not NULL";
+        ArrayList<DataMaps> datamap = new ArrayList<DataMaps>();
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            
+            while(rs.next()){
+                datamap.add(new DataMaps(rs.getString("title"),rs.getString("duration"),rs.getString("verses"),rs.getString("locations")));
+            }
+            return datamap;
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return datamap;
+    }
+
+
+    public DataMaps ambilNamaPlace(String id){
+    
+        String query = "select displayTitle, latitude, longitude from places where placeLookup = '" + id +"'";
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(query)){
+            return new DataMaps(rs.getString("displayTitle"),rs.getDouble("latitude"),rs.getDouble("longitude"));
+        } 
+        catch (SQLException e) {
+            e.getMessage();
+        }
+        return null;
+    }
+
+
+     
 }

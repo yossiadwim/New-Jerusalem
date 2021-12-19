@@ -20,7 +20,8 @@ public class Main extends Application {
        
 
         // Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("VisualisasiUtama.fxml"));
         stage.setTitle("New Jerusalem");
         Scene scene = new Scene(root);
         scene.getStylesheets().add("resources/id/ac/ukdw/fti/rpl/theartificier/style.css");
