@@ -20,139 +20,154 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane prefHeight="692.0" prefWidth="938.0" styleClass="layout" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.Controller">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="265.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="692.0" minWidth="10.0" prefWidth="610.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="4.0" prefWidth="60.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="0.0" prefWidth="0.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="48.66666793823242" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="597.0" minHeight="10.0" prefHeight="548.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
-   </rowConstraints>
+
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.Controller">
    <children>
-      <Label fx:id="labelJumlah" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="540.0" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets left="50.0" />
-         </GridPane.margin>
-      </Label>
-      <Text fill="#6fb3b8" strokeType="OUTSIDE" strokeWidth="0.0" text="New Jerusalem Project" GridPane.rowIndex="2">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="12.0" left="65.0" />
-         </GridPane.margin>
-      </Text>
-      <HBox id="title_background" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <ImageView fitHeight="692.0" fitWidth="938.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../img/backgroundnj.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutY="0.800000011920929" prefHeight="692.0" prefWidth="938.0" styleClass="layout">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="265.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="692.0" minWidth="10.0" prefWidth="610.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="4.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="616.0" minWidth="0.0" prefWidth="0.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="48.66666793823242" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="597.0" minHeight="10.0" prefHeight="548.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Text id="title" fill="#388087" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
+            <Label fx:id="labelJumlah" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="540.0" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="50.0" />
+               </GridPane.margin>
+            </Label>
+            <Text fill="#6fb3b8" strokeType="OUTSIDE" strokeWidth="0.0" text="New Jerusalem Project" GridPane.rowIndex="2">
                <font>
-                  <Font name="System Bold Italic" size="22.0" />
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="70.0" top="20.0" />
-               </HBox.margin>
+               <GridPane.margin>
+                  <Insets bottom="12.0" left="65.0" />
+               </GridPane.margin>
             </Text>
-         </children>
-      </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-         <children>
-            <Button id="pindahHalaman" fx:id="buttonVisual" mnemonicParsing="false" onAction="#switchToVisualisasiPage" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../img/outline_home_white_24dp.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <HBox.margin>
-                  <Insets left="40.0" right="10.0" />
-               </HBox.margin>
-            </Button>
-            <Button id="pindahHalaman" fx:id="buttonKembali" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="29.0" prefWidth="150.0" stylesheets="@style.css" text="BIBLE" textAlignment="CENTER">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../img/outline_menu_book_white_24dp.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children></HBox>
-      <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="33.0" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fx:id="image" fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../img/search-icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" top="10.0" />
-         </GridPane.margin>
-      </Button>
-      <TabPane fx:id="tp" prefHeight="548.0" prefWidth="508.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <tabs>
-          <Tab fx:id="tabPlace" text="Place">
-               <content>
-                  <AnchorPane prefHeight="512.0" prefWidth="602.0">
-                     <children>
-                        <ListView fx:id="listViewPlace" layoutX="-1.0" layoutY="-1.0" prefHeight="522.0" prefWidth="602.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-          </Tab>
-          <Tab fx:id="tabEvent" text="Event">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <ListView fx:id="listViewEvent" layoutX="-2.0" prefHeight="518.0" prefWidth="602.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-          </Tab>
-        </tabs>
-         <GridPane.margin>
-            <Insets left="10.0" />
-         </GridPane.margin>
-      </TabPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" GridPane.rowIndex="4">
-         <children>
-            <Label layoutX="14.0" layoutY="6.0" text="People" />
-            <ScrollPane fx:id="scrollpanePeople" layoutX="13.0" layoutY="32.0" prefHeight="215.0" prefWidth="246.0">
-              <content>
-                <AnchorPane fx:id="tampilJumlahPeople" minHeight="0.0" minWidth="0.0" prefWidth="224.0" />
-              </content>
-            </ScrollPane>
-            <ScrollPane fx:id="scrollpanePlaces" layoutX="14.0" layoutY="290.0" prefHeight="251.0" prefWidth="246.0">
-              <content>
-                <AnchorPane fx:id="tampilJumlahPlaces" minHeight="0.0" minWidth="0.0" prefWidth="224.0" />
-              </content>
-            </ScrollPane>
-          <AnchorPane layoutX="9.0" layoutY="244.0" minHeight="0.0" minWidth="0.0" prefHeight="29.0" prefWidth="50.0">
+            <HBox id="title_background" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Label layoutX="9.0" layoutY="21.0" text="Places" />
+                  <Text id="title" fill="#388087" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="22.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="70.0" top="20.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Button id="pindahHalaman" fx:id="buttonVisual" mnemonicParsing="false" onAction="#switchToVisualisasiPage" prefHeight="31.0" prefWidth="39.0" stylesheets="@style.css" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../img/outline_home_white_24dp.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="40.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button id="pindahHalaman" fx:id="buttonKembali" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="29.0" prefWidth="150.0" stylesheets="@style.css" text="BIBLE" textAlignment="CENTER">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../img/outline_menu_book_white_24dp.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Button id="searchbutton" fx:id="button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleButtonAction" prefHeight="30.0" prefWidth="33.0" stylesheets="@style.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fx:id="image" fitHeight="19.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../img/search-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </GridPane.margin>
+            </Button>
+            <TabPane fx:id="tp" prefHeight="548.0" prefWidth="508.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+              <tabs>
+                <Tab fx:id="tabPlace" text="Place">
+                     <content>
+                        <AnchorPane prefHeight="512.0" prefWidth="602.0">
+                           <children>
+                              <ListView fx:id="listViewPlace" layoutX="-1.0" layoutY="-1.0" prefHeight="522.0" prefWidth="602.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+                <Tab fx:id="tabEvent" text="Event">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ListView fx:id="listViewEvent" layoutX="-2.0" prefHeight="518.0" prefWidth="602.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+              </tabs>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </TabPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" GridPane.rowIndex="4">
+               <children>
+                  <Label layoutX="14.0" layoutY="6.0" text="People" />
+                  <ScrollPane fx:id="scrollpanePeople" layoutX="13.0" layoutY="32.0" prefHeight="215.0" prefWidth="246.0">
+                    <content>
+                      <AnchorPane fx:id="tampilJumlahPeople" minHeight="0.0" minWidth="0.0" prefWidth="224.0" />
+                    </content>
+                  </ScrollPane>
+                  <ScrollPane fx:id="scrollpanePlaces" layoutX="14.0" layoutY="290.0" prefHeight="251.0" prefWidth="246.0">
+                    <content>
+                      <AnchorPane fx:id="tampilJumlahPlaces" minHeight="0.0" minWidth="0.0" prefWidth="224.0" />
+                    </content>
+                  </ScrollPane>
+                <AnchorPane layoutX="9.0" layoutY="244.0" minHeight="0.0" minWidth="0.0" prefHeight="29.0" prefWidth="50.0">
+                     <children>
+                        <Label layoutX="9.0" layoutY="21.0" text="Places" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
+            <TextField fx:id="search" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
-      </AnchorPane>
-      <TextField fx:id="search" onAction="#onEnter" prefHeight="33.0" prefWidth="347.0" promptText="Cari Tempat atau Kejadian dalam Alkitab : " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      
+      </GridPane>
    </children>
-
-</GridPane>
+</AnchorPane>

@@ -85,10 +85,8 @@ public class Database {
                             hasil.add(new EventHandle (rs.getString("title"),rs.getInt("startDate"),rs.getString("duration"),rs.getString("verses")));
                             break;
                         }
-                     
                     }
                 }
- 
             }
             return hasil;
         } catch (SQLException e) {
@@ -214,7 +212,6 @@ public class Database {
             System.out.println(e.getMessage());
         }
         return chapter;
-
     }
 
     public ArrayList ambilAyat(String pasal){

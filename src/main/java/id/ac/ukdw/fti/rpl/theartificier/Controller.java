@@ -1,6 +1,5 @@
 package id.ac.ukdw.fti.rpl.theartificier;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +19,7 @@ import id.ac.ukdw.fti.rpl.theartificier.modal.ButtonLabel;
 import id.ac.ukdw.fti.rpl.theartificier.modal.EventHandle;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 import javafx.collections.FXCollections;
+import javafx.scene.image.Image ;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -43,6 +43,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
@@ -104,7 +105,6 @@ public class Controller implements Initializable{
     @FXML
     private Button buttonVisual;
 
-        
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -113,7 +113,6 @@ public class Controller implements Initializable{
     public static String judul;
     public static ArrayList<String> ayat = new ArrayList<>();
     
-
     static Database db = new Database();
 
     private List<Button> buttonPlace = new ArrayList<>();
@@ -127,7 +126,6 @@ public class Controller implements Initializable{
 
     private List<Rectangle> rectPlaces = new ArrayList<>();
     private List<Label> labelRectPlaces = new ArrayList<>();
-
 
     private HashMap<String, Integer> peopleMap= new HashMap<String, Integer>();
     private HashMap<String, Integer> placesMap= new HashMap<String, Integer>();
@@ -143,7 +141,7 @@ public class Controller implements Initializable{
     private final int heightRect = 29;
     public static String searchInitialize = "";
     public static boolean isFromVisualUtama = false;
-    
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         if(!searchInitialize.equals("")){
@@ -154,7 +152,6 @@ public class Controller implements Initializable{
         if(isFromVisualUtama){
             search.setText(searchInitialize);
         }
-        
     }
 
     @FXML
@@ -205,15 +202,12 @@ public class Controller implements Initializable{
             olahPlace = String.valueOf(olahPlace.charAt(0)).toUpperCase() + olahPlace.substring(1).toLowerCase();
             ArrayList<VersesAndCount> hasilPlace = db.viewDataPlace(olahPlace);
 
-
             olahEvent = String.valueOf(olahEvent.charAt(0)).toUpperCase() + olahEvent.substring(1).toLowerCase();
             ArrayList<EventHandle> hasilEvent = db.viewDataEvents(olahEvent);
 
             ObservableList<String> tampilPlace = FXCollections.observableArrayList();
-
             
             if(!hasilPlace.isEmpty() || !hasilEvent.isEmpty()){
-
                 int count = 0;
                 for(VersesAndCount isi : hasilPlace){
                     try{
@@ -229,13 +223,9 @@ public class Controller implements Initializable{
                         addPeoplePlacesMap(isi.getVerses());
                         count++;
                     }
-       
                 }
                 listViewPlace.setItems(tampilPlace);
-                
 
-    
-    
                 ObservableList<String> tampilEvent = FXCollections.observableArrayList();
                 for(EventHandle isi2 : hasilEvent){
                     if(isi2.getVerses() != null){
@@ -263,13 +253,11 @@ public class Controller implements Initializable{
                 listViewEvent.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                     @Override
-                    public void handle(MouseEvent event) {
-                            
+                    public void handle(MouseEvent event) {  
                         try{
-
                             if(listViewEvent.getSelectionModel().getSelectedItem() != null){
                                 click = listViewEvent.getSelectionModel().getSelectedItem().toString();
-                            
+
                                 // String[] split = click.replace("\n","").split(",");
                                 // judul = split[0];
                                 // for(int i=1;i< split.length;i++){
@@ -315,14 +303,11 @@ public class Controller implements Initializable{
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-                        
                     }
-                    
                 });
 
 
                 labelJumlah.setText(count + " hasil pencarian telah ditemukan untuk " + '"'+search.getText()+'"');
-    
     
                 if(hasilPlace.isEmpty()){
                     tp.getSelectionModel().select(tabEvent);
@@ -360,7 +345,6 @@ public class Controller implements Initializable{
                     BarVisualisasi barPeople = createBarVisualisasi(peopleCount.getKey(), peopleCount.getValue(), peopleCountMap, "people");
                     rectPeople.add(barPeople.getRect());
                     labelRectPeople.add(barPeople.getLbl());
-                   
                 }
     
                 List<Map.Entry<String, Integer> > listPlaces2 = new LinkedList<Map.Entry<String, Integer> >(sortedPlacesMap.entrySet());
@@ -422,7 +406,6 @@ public class Controller implements Initializable{
             ArrayList<EventHandle> hasilEvent = db.viewDataEvents(olahEvent);
 
             ObservableList<String> tampilPlace = FXCollections.observableArrayList();
-
             
             if(!hasilPlace.isEmpty() || !hasilEvent.isEmpty()){
 
@@ -441,13 +424,9 @@ public class Controller implements Initializable{
                         addPeoplePlacesMap(isi.getVerses());
                         count++;
                     }
-       
                 }
                 listViewPlace.setItems(tampilPlace);
                 
-
-    
-    
                 ObservableList<String> tampilEvent = FXCollections.observableArrayList();
                 for(EventHandle isi2 : hasilEvent){
                     if(isi2.getVerses() != null){
@@ -489,7 +468,6 @@ public class Controller implements Initializable{
                                     ayat.add(split[i]);
                                 }
 
-                                    
                                 root = FXMLLoader.load(getClass().getResource("Detail.fxml"));
                                 stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
                                 stage.setTitle("New Jerusalem");
@@ -502,10 +480,7 @@ public class Controller implements Initializable{
                         catch(IOException e){
                             e.getMessage();
                         }
-
-                        
-                    }
-                    
+                    } 
                 });
 
 
@@ -655,7 +630,6 @@ public class Controller implements Initializable{
         catch(Exception e){
             e.getMessage();
         }
-
     }
     
 
@@ -737,7 +711,7 @@ public class Controller implements Initializable{
     }
 
     public void switchToVisualisasiPage(ActionEvent event) throws IOException{
-        root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("VisualisasiUtama.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("New Jerusalem");
         scene = new Scene(root);
@@ -774,6 +748,4 @@ public class Controller implements Initializable{
         }
         return true;
     }
-
-    
 }

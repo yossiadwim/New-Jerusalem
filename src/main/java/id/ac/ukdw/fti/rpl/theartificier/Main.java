@@ -18,7 +18,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
        
-
         // Parent root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         // Parent root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("VisualisasiUtama.fxml"));
@@ -37,5 +36,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
 }

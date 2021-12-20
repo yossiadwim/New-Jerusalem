@@ -17,16 +17,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import id.ac.ukdw.fti.rpl.theartificier.Controller;
-
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.ResourceBundle;
-
-
-
 import id.ac.ukdw.fti.rpl.theartificier.database.Database;
 import id.ac.ukdw.fti.rpl.theartificier.modal.BookChapterNum;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
@@ -34,18 +30,13 @@ import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 
 public class HomePageController implements Initializable
 {
-
-    
-    
     private Stage stage;
     private Scene scene;
     private Parent root;
     
-   
     @FXML
     private ComboBox<String> kitab;
     
-
     @FXML
     private Button pindahHalaman;
 
@@ -77,20 +68,16 @@ public class HomePageController implements Initializable
     public static int ayatAwal;
     public static boolean isFromVisual = false;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
         // ArrayList<BookChapterNum> verse = db.versesFromStart();
         // ObservableList<String> hasilVerse = FXCollections.observableArrayList();
-
         // for(BookChapterNum isiVerse : verse){
         //     // hasilVerse.add(isiVerse.getOsisRef()+"\n"+isiVerse.getVerse()+"\n"+" ");
         //     hasilVerse.add(isiVerse.getOsisRef()+"\n"+Controller.wrapText(isiVerse.getVerse(), 117, " ")+"\n"+" ");
         // }
         // tampilAyat.setItems(hasilVerse);
-
-
         //kitab
         if(isFromVisual){
             ArrayList<BookChapterNum> data = db.ambilKitab();
@@ -98,7 +85,6 @@ public class HomePageController implements Initializable
     
             for(BookChapterNum isi : data){
                 hasil.add(isi.getBook());
-                
             }
             kitab.setItems(hasil); 
             kitab.getSelectionModel().select(hasil.indexOf(kitabAwal));
@@ -119,19 +105,13 @@ public class HomePageController implements Initializable
     
             for(BookChapterNum isi : data){
                 hasil.add(isi.getBook());
-                
             }
             kitab.setItems(hasil); 
         }
-
-        
-
         // System.out.println("start");
         // ArrayList<BookChapterNum> b = db.getAllBooks();
         // System.out.println("finish");
-
     }
-
     // private String wrapText(String text){
     //     String[] split = text.split(" ");
     //     int count = 0;
@@ -152,7 +132,7 @@ public class HomePageController implements Initializable
     // }
 
     public void switchToScene(ActionEvent event)throws Exception{
-        root = FXMLLoader.load(getClass().getResource("VisualisasiPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("VisualisasiUtama.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle("New Jerusalem");
         scene = new Scene(root);
@@ -192,14 +172,11 @@ public class HomePageController implements Initializable
         ArrayList<BookChapterNum> isiAyat = db.ayatHomePage(kitabAwal, pasalAwal, ayatAwal);
         ObservableList<String> hasil3 = FXCollections.observableArrayList();
         
-        
         for(BookChapterNum isi3 : isiAyat){
             
             hasil3.add(isi3.getOsisRef()+ "\n"+ Controller.wrapText(isi3.getVerse(), 117, " ") + "\n ");
         }
-
         tampilAyat.setItems(hasil3);
-        
     }
 
     public void onClickSelectedKitab(ActionEvent event) {
@@ -212,8 +189,6 @@ public class HomePageController implements Initializable
             hasil.add(isi.getChapter());
         }
         pasal.setItems(hasil);
-        
-    
     }
     
     public void onClickSelectedPasal(ActionEvent event) {
@@ -225,7 +200,6 @@ public class HomePageController implements Initializable
             hasil2.add(isi2.getNum());
         }
         ayat.setItems(hasil2);
-    
     }
 
     public void onClickSelectedAyat(ActionEvent event) {
@@ -237,14 +211,10 @@ public class HomePageController implements Initializable
             ArrayList<BookChapterNum> isiAyat = db.ayatHomePage(kt,ps,ayt);
             ObservableList<String> hasil3 = FXCollections.observableArrayList();
             
-            
             for(BookChapterNum isi3 : isiAyat){
-                
                 hasil3.add(isi3.getOsisRef()+ "\n"+ Controller.wrapText(isi3.getVerse(), 117, " ") + "\n ");
             }
-
             tampilAyat.setItems(hasil3);
-
         }
         catch(Exception e){
             e.getMessage();
