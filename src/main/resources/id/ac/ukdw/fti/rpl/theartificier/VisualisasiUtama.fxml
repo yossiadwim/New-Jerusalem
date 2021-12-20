@@ -54,6 +54,11 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Button id="pindahHalaman" fx:id="btnTimeline" layoutX="571.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchTimeline" prefHeight="29.0" prefWidth="178.0" stylesheets="@Dokumen/Kehidupan%20Kampus/Semester%205/RekayasaPerangkatLunak/New-Jerusalem/src/main/resources/id/ac/ukdw/fti/rpl/theartificier/style.css" text="Timeline Adam - Abraham" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 
 </AnchorPane>

@@ -40,8 +40,8 @@
             <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="48.66666793823242" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="225.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="597.0" minHeight="10.0" prefHeight="548.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="597.0" minHeight="10.0" prefHeight="571.999951171875" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="87.0" minHeight="0.0" prefHeight="11.200048828124977" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label fx:id="labelJumlah" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="540.0" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -129,9 +129,9 @@
                 </Tab>
                 <Tab fx:id="tabEvent" text="Event">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="537.0" prefWidth="602.0">
                            <children>
-                              <ListView fx:id="listViewEvent" layoutX="-2.0" prefHeight="518.0" prefWidth="602.0" />
+                              <ListView fx:id="listViewEvent" layoutX="-2.0" prefHeight="548.0" prefWidth="602.0" />
                            </children>
                         </AnchorPane>
                      </content>

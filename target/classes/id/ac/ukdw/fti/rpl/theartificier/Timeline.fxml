@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?fxml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane focusTraversable="true" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.TimelineController">
+   <children>
+      <Text id="title" fill="#388087" layoutX="65.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font>
+      </Text>
+      <Text fill="#6fb3b8" layoutX="62.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Jerusalem Project">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Text>
+      <Button id="pindahHalaman" fx:id="pindahHalaman" layoutX="404.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchHalaman" prefHeight="29.0" prefWidth="150.0" text="Places dan Events" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/search-icon-white.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <stylesheets>
+            <URL value="@Dokumen/Kehidupan%20Kampus/Semester%205/RekayasaPerangkatLunak/New-Jerusalem/src/main/resources/id/ac/ukdw/fti/rpl/theartificier/style.css" />
+            <URL value="@style.css" />
+         </stylesheets>
+      </Button>
+      <AnchorPane fx:id="anchorTimeline" layoutX="9.0" layoutY="97.0" prefHeight="582.0" prefWidth="1370.0" />
+      <Button id="pindahHalaman" fx:id="btnHomePage" layoutX="237.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToHomePage" prefHeight="16.0" prefWidth="150.0" stylesheets="@style.css" text="BIBLE" textAlignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../img/outline_menu_book_white_24dp.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="677.0" layoutY="28.0" prefHeight="43.0" prefWidth="507.0" text="Timeline Adam - Abraham">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Label>
+   </children>
+
+</AnchorPane>

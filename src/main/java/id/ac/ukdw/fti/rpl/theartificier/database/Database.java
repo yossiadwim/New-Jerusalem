@@ -5,6 +5,7 @@ import id.ac.ukdw.fti.rpl.theartificier.modal.BookDiv;
 import id.ac.ukdw.fti.rpl.theartificier.modal.Chapter;
 import id.ac.ukdw.fti.rpl.theartificier.modal.DataMaps;
 import id.ac.ukdw.fti.rpl.theartificier.modal.EventHandle;
+import id.ac.ukdw.fti.rpl.theartificier.modal.Timeline;
 import id.ac.ukdw.fti.rpl.theartificier.modal.VersesAndCount;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -379,6 +380,30 @@ public class Database {
         return null;
     }
 
-
-     
+    public ArrayList dataTimeline(){
+        String query = "select title, predecessor, lag, partOf, verses from events where title like 'birth%' and partOf like 'lifetime%' and lag is not null";
+        ArrayList<Timeline> timeline = new ArrayList<Timeline>();
+        try (Connection conn = DriverManager.getConnection(url);
+        Statement stmt  = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query)){
+            
+            while(rs.next()){
+                String query2 = "select * from events where partOf like 'lifetime%' and title like 'death%'  and predecessor = '"+ rs.getString("predecessor")+"'";
+                try (Connection conn2 = DriverManager.getConnection(url);
+                Statement stmt2  = conn2.createStatement();
+                ResultSet rs2 = stmt2.executeQuery(query2)){
+                    timeline.add(new Timeline(rs.getString("predecessor"), rs.getString("lag"), rs2.getString("lag"), rs.getString("verses"), rs2.getString("verses")));
+                }
+                catch(SQLException e){
+                    e.getMessage();
+                }
+                        
+            }
+            return timeline;
+        }
+        catch(SQLException e){
+            e.getMessage();
+        }
+        return timeline;
+    }
 }

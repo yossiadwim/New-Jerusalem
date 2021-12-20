@@ -35,6 +35,9 @@ public class VisualisasiUtamaController implements Initializable{
     private Button btnHomePage;
 
     @FXML
+    private Button btnTimeline;
+
+    @FXML
     private AnchorPane AnchorMaps;
 
     private HashMap<String, DataMaps> placesMap= new HashMap<String, DataMaps>();
@@ -73,6 +76,16 @@ public class VisualisasiUtamaController implements Initializable{
         stage.show();
     }
 
+    public void switchTimeline(ActionEvent event) throws IOException{
+        root = FXMLLoader.load(getClass().getResource("Timeline.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void switchHalaman(ActionEvent event) throws IOException{
         root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
