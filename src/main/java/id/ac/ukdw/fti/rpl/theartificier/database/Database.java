@@ -373,6 +373,7 @@ public class Database {
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(query)){
+                 
             return new DataMaps(rs.getString("displayTitle"),rs.getDouble("latitude"),rs.getDouble("longitude"));
         } 
         catch (SQLException e) {

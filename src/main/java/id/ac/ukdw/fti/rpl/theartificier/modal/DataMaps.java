@@ -66,6 +66,10 @@ public class DataMaps {
         return longitude;
     }
 
+    public void setTitleDuration(String title, String duration) {
+        this.titleDuration.put(title, duration);
+    }
+
     public HashMap<String, String> getTitleDuration() {
         return titleDuration;
     }    

@@ -16,7 +16,20 @@ public class OlahDataMaps {
     private void addToEvent(String id, String duration, String title){
         DataMaps data = db.ambilNamaPlace(id);
         // listEvent.put(data.getNamaLocation(), new DataMaps(data.getLatitude(), data.getLongitude(), duration, title));
-        listEvent.put(data.getNamaLocation(), new DataMaps(data.getLatitude(), data.getLongitude(), duration, title));
+        // if(data.getLatitude() > 0.0 && data.getLongitude() > 0.0){
+        //     listEvent.put(data.getNamaLocation(), new DataMaps(data.getLatitude(), data.getLongitude(), duration, title));
+        // }
+
+        if(data.getLatitude() > 0.0 && data.getLongitude() > 0.0){
+            try {
+                listEvent.put(data.getNamaLocation(), listEvent.get(data.getNamaLocation())).setTitleDuration(title, duration);;
+            } catch (Exception e) {
+                //TODO: handle exception
+                listEvent.put(data.getNamaLocation(), new DataMaps(data.getLatitude(), data.getLongitude(), duration, title));
+            }
+        }
+        
+        
     }
 
     public void olahData(ArrayList<DataMaps> dataMaps){

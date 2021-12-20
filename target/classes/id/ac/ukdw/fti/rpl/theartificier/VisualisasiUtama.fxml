@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" prefHeight="692.0" prefWidth="938.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.VisualisasiUtamaController">
+<AnchorPane focusTraversable="true" prefHeight="835.0" prefWidth="1014.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="id.ac.ukdw.fti.rpl.theartificier.VisualisasiUtamaController">
    <children>
       <Text fill="#388087" layoutX="65.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TheArtificer" textAlignment="CENTER">
          <font>
@@ -45,16 +45,16 @@
             </ImageView>
          </graphic>
       </Button>
-      <AnchorPane fx:id="AnchorMaps" layoutX="19.0" layoutY="137.0" prefHeight="465.0" prefWidth="900.0">
+      <AnchorPane fx:id="AnchorMaps" layoutX="19.0" layoutY="137.0" prefHeight="671.0" prefWidth="1004.0">
          <children>
-            <ImageView fitHeight="465.0" fitWidth="900.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="671.0" fitWidth="1016.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../img/maps%20final.PNG" />
+                  <Image url="@../../../../../../img/mapsv2.PNG" />
                </image>
             </ImageView>
-            <Button alignment="CENTER" layoutX="890.0" layoutY="455.0" mnemonicParsing="false" style="-fx-background-radius: 5em; -fx-min-width: 10px; -fx-min-height: 10px; -fx-max-width: 10px; -fx-max-height: 10px; -fx-background-color: blue;" text="Button" />
          </children>
       </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 
 </AnchorPane>
