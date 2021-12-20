@@ -1,5 +1,6 @@
 package id.ac.ukdw.fti.rpl.theartificier;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +11,18 @@ import id.ac.ukdw.fti.rpl.theartificier.database.Database;
 import id.ac.ukdw.fti.rpl.theartificier.modal.DataMaps;
 import id.ac.ukdw.fti.rpl.theartificier.modal.OlahDataMaps;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -32,6 +39,9 @@ public class VisualisasiUtamaController implements Initializable{
 
     private HashMap<String, DataMaps> placesMap= new HashMap<String, DataMaps>();
     private Database db = new Database();
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     // private final Double MAX_WIDTH = 900.0;
     // private final Double MAX_HEIGHT = 465.0;
 
@@ -52,14 +62,26 @@ public class VisualisasiUtamaController implements Initializable{
 
     private final String BUTTON_STYLE = "-fx-background-radius: 5em; -fx-min-width: 7px; -fx-min-height: 7px; -fx-max-width:7px; -fx-max-height:7px; -fx-background-color:blue;";
 
-    @FXML
-    void switchHalaman(ActionEvent event) {
-
+    public void switchToHomePage(ActionEvent event)throws IOException{
+        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+        stage = (Stage) ((Node) (event.getSource())).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    @FXML
-    void switchToHomePage(ActionEvent event) {
-
+    public void switchHalaman(ActionEvent event) throws IOException{
+        root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle("New Jerusalem");
+        scene = new Scene(root);
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/img/appicon.png")));
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
@@ -105,7 +127,7 @@ public class VisualisasiUtamaController implements Initializable{
         ArrayList<Button> btnList = new ArrayList<Button>();
         // key nya namaLocation
         for(String key: olahData.getListEvent().keySet()){
-            Button btn = new Button();
+            Button btn = new Button(key);
             // Double x = (hitungXY(olahData.getListEvent().get(key).getLongitude(), MAX_X, MIN_X) * MAX_WIDTH) - 10;
             // Double y = (hitungXY(olahData.getListEvent().get(key).getLatitude(), MAX_Y, MIN_Y) * MAX_HEIGHT) +31;
             Double x = (hitungXY(olahData.getListEvent().get(key).getLongitude(), MAX_X, MIN_X) * MAX_WIDTH) - 30;
@@ -116,7 +138,9 @@ public class VisualisasiUtamaController implements Initializable{
             btn.setLayoutX(x);
             btn.setLayoutY(y);
             btn.setStyle(BUTTON_STYLE);
+            btn.setCursor(Cursor.HAND);
             String tooltip = "";
+            tooltip += "Place:"+"\n"+key+"\n\nEvent: \n";
             for(String key2: olahData.getListEvent().get(key).getTitleDuration().keySet()){
                 // key2(title) : valuenya key2(duration)
                 tooltip += key2 + " : " + olahData.getListEvent().get(key).getTitleDuration().get(key2) + "\n";
@@ -124,7 +148,31 @@ public class VisualisasiUtamaController implements Initializable{
             // System.out.println(tooltip + " " + x + " " + y);
                 System.out.println(key + " " + x + " " + y);
             btn.setTooltip(new Tooltip(tooltip));
+
+
+            btn.setOnAction(new EventHandler<ActionEvent>() {
+
+                @Override
+                public void handle(ActionEvent event) {
+                    Controller.searchInitialize = key;
+                    Controller.isFromVisualUtama = true;
+                    try{
+                        switchHalaman((ActionEvent) event);
+                    }
+                    catch(Exception e){
+                        e.getMessage();
+                    }
+
+
+                    
+                }
+                
+            });
             btnList.add(btn);
+
+        
+
+
             // if(count == 2){
             //     break;
             // }

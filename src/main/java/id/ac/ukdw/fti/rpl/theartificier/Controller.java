@@ -142,6 +142,7 @@ public class Controller implements Initializable{
     private final double maxRect = 215;
     private final int heightRect = 29;
     public static String searchInitialize = "";
+    public static boolean isFromVisualUtama = false;
     
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -149,6 +150,9 @@ public class Controller implements Initializable{
             ControllerDetail.searchInitialize = searchInitialize;
             search.setText(searchInitialize);
             tampilHasilSearch();
+        }
+        if(isFromVisualUtama){
+            search.setText(searchInitialize);
         }
         
     }

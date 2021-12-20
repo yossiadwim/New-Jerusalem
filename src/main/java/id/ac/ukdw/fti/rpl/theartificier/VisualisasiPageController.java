@@ -138,6 +138,7 @@ public class VisualisasiPageController implements Initializable{
                 btn.setCursor(Cursor.HAND);
                 btn.setOnMouseEntered(e -> btn.setStyle(BUTTON_HOVER));
                 btn.setOnMouseExited(e -> btn.setStyle(BUTTON_STYLE));
+                
                 btn.setOnAction(new EventHandler<ActionEvent>() {
 
                     @Override
